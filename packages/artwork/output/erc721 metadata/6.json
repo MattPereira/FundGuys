@@ -1,0 +1,30 @@
+{
+  "description": "This is a token with \"BG_12_Waves v1\" as Background",
+  "image": "ipfs://__CID__/59660eae86c32a84ddfe80a53adfb2aeb120a1fb.png",
+  "name": "Shroom 6",
+  "dna": "59660eae86c32a84ddfe80a53adfb2aeb120a1fb",
+  "uid": "6",
+  "generator": "HashLips Lab AE 2.0",
+  "attributes": [
+    {
+      "trait_type": "1_Face",
+      "value": "Face_14"
+    },
+    {
+      "trait_type": "2_Stem",
+      "value": "Stem_10"
+    },
+    {
+      "trait_type": "3_Cap",
+      "value": "Cap_09_v3"
+    },
+    {
+      "trait_type": "4_Feet",
+      "value": "Feet_08"
+    },
+    {
+      "trait_type": "5_Background",
+      "value": "BG_12_Waves v1"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "description": "This is a token with \"BG_06_Space\" as Background",
+  "image": "ipfs://__CID__/c0e7237963bfe52b725e064cca65cc45839a1c58.png",
+  "name": "Shroom 9",
+  "dna": "c0e7237963bfe52b725e064cca65cc45839a1c58",
+  "uid": "9",
+  "generator": "HashLips Lab AE 2.0",
+  "attributes": [
+    {
+      "trait_type": "1_Face",
+      "value": "Face_13"
+    },
+    {
+      "trait_type": "2_Stem",
+      "value": "Stem_08"
+    },
+    {
+      "trait_type": "3_Cap",
+      "value": "Cap_03_v3"
+    },
+    {
+      "trait_type": "4_Feet",
+      "value": "Feet_02"
+    },
+    {
+      "trait_type": "5_Background",
+      "value": "BG_06_Space"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 28.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Feet" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 880 880" style="enable-background:new 0 0 880 880;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:url(#SVGID_1_);}
+	.st1{fill:#FFFFEA;stroke:#083330;stroke-width:11.1246;stroke-linecap:round;stroke-miterlimit:10;}
+</style>
+<g>
+	
+		<radialGradient id="SVGID_1_" cx="436.6071" cy="783.0391" r="154.776" gradientTransform="matrix(1 0 0 0.221 0 619.0565)" gradientUnits="userSpaceOnUse">
+		<stop  offset="0" style="stop-color:#969696"/>
+		<stop  offset="1" style="stop-color:#FFFFFF;stop-opacity:0"/>
+	</radialGradient>
+	<ellipse class="st0" cx="436.6" cy="792.1" rx="154.6" ry="36.2"/>
+	<path class="st1" d="M441.2,782.6c0,0,69.7,34.9,79.3,28.8c9.6-6.1-43.9-38.4-45.5-44.5c-1.5-6.1,1.5-48,1.5-48l-39.4,0.5
+		L441.2,782.6z"/>
+	<path class="st1" d="M401.8,718.5c0,0,10.1,39.4,2,49.5c-8.1,10.1-74.3,36.9-72.7,43.9c1.5,7.1,104.6-13.1,107.6-24.8
+		c3-11.6,1.8-66.4,1.8-66.4L401.8,718.5z"/>
+</g>
+</svg>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 28.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Face" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 880 880" style="enable-background:new 0 0 880 880;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:none;stroke:#083330;stroke-width:7.4164;stroke-linecap:round;stroke-miterlimit:10;}
+	.st1{fill:#FFFFFF;stroke:#083330;stroke-width:7.4164;stroke-linecap:round;stroke-miterlimit:10;}
+	.st2{fill:none;stroke:#083330;stroke-width:7.4164;stroke-miterlimit:10;}
+	.st3{fill:#FFFFFF;stroke:#083330;stroke-width:7.4164;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st4{fill:none;stroke:#083330;stroke-width:7.4164;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st5{fill:#083330;}
+	.st6{fill:#FFFFFF;}
+	.st7{fill:#FBCDB8;}
+</style>
+<g>
+	<path class="st0" d="M359.7,631.6c-3.7,13.6-7.9,27.1-12.4,40.5"/>
+	<path class="st0" d="M524.2,627.4c5.2,18.9,6.7,26.9,11.9,44.2"/>
+	<path class="st1" d="M357.8,649.3c0,0,41.4-23.2,81.8-23.7s84.4,18.7,84.4,18.7s-10.6,63.1-81.8,61.1S357.8,649.3,357.8,649.3z"/>
+	<path class="st2" d="M388.1,637.2c0,0-12.1,18.7,1,54"/>
+	<path class="st2" d="M413.9,629.1c0,0-3,36.9,1,71.7"/>
+	<path class="st2" d="M443.7,624c0,0,3,63.1-1.5,81.3"/>
+	<path class="st2" d="M470.5,629.6c0,0,7.1,53.5-4,74.3"/>
+	<path class="st2" d="M496.2,635.6c0,0,7.1,24.2-2.5,55.1"/>
+	<path class="st3" d="M397.2,595.4c-3.6-0.8-6.6-3-9.9-4.7c-15.6-9-35.5-0.6-36.9,17.3c2.6,1.2,4.5,3.6,6.9,5.3
+		c7.7,5.3,19.7,6.1,27.5,0.6c7.4-5.3,5.7-14.8,10.8-17.3L397.2,595.4z"/>
+	<path class="st3" d="M481.3,595.4c3.5-1.1,6.4-3.5,9.4-5.5c14.8-10.3,35.4-3.6,38.2,14.1c-2.5,1.4-4.2,4-6.4,5.9
+		c-7.3,5.9-19.1,7.8-27.4,2.9c-7.8-4.6-6.9-14.2-12.3-16.3L481.3,595.4z"/>
+	<path class="st4" d="M350.2,605.5c-1.9,3-5.1,5.2-8.6,5.9"/>
+	<path class="st4" d="M529.4,606.1c2.1,2.9,5.4,4.8,9,5.3"/>
+	<ellipse class="st5" cx="369.4" cy="602.2" rx="8.1" ry="8.2"/>
+	<ellipse class="st5" cx="509.3" cy="600.4" rx="8.1" ry="8.2"/>
+	
+		<ellipse transform="matrix(0.2071 -0.9783 0.9783 0.2071 -177.8646 977.5836)" class="st6" cx="514.1" cy="598.5" rx="3.4" ry="4.9"/>
+	
+		<ellipse transform="matrix(0.9726 -0.2326 0.2326 0.9726 -128.9872 103.3365)" class="st6" cx="373.6" cy="598.6" rx="5.3" ry="3.7"/>
+	<circle class="st7" cx="324.5" cy="640.2" r="21.7"/>
+	<circle class="st7" cx="558.3" cy="640.2" r="21.7"/>
+</g>
+</svg>
