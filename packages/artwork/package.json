@@ -1,7 +1,0 @@
-{
-  "name": "artwork",
-  "packageManager": "yarn@3.2.3",
-  "dependencies": {
-    "@hashlips-lab/art-engine": "^2.0.0-alpha7"
-  }
-}
