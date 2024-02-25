@@ -8,8 +8,10 @@ A Public Goods Funding Platform on Base that rewards funders with Mygologuys NFT
 
 - integrate with metamask snaps
 - Ability to donate directly from wallet
+- Ability to donate to a campaign with cc without connecting wallet
 - Integrate with frames on Warpcast?
 - To integrate with Andy’s NFT: (Donation also mints NFT)
+- initial 'Founding Fundguys' dstribution mechanism / airdrop (qr code + tinyurl to a whitelist page on dapp)
 
 ## Mycologuys NFT Collection
 
