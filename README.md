@@ -2,8 +2,6 @@
 
 A Public Goods Funding Platform on Base that rewards funders with Mygologuys NFTs.
 
-![collection](./packages/nextjs/public/thumbnail.jpg)
-
 ## Public Goods Funding Platform
 
 - integrate with metamask snaps
@@ -14,6 +12,8 @@ A Public Goods Funding Platform on Base that rewards funders with Mygologuys NFT
 - initial 'Founding Fundguys' dstribution mechanism / airdrop (qr code + tinyurl to a whitelist page on dapp)
 
 ## Mycologuys NFT Collection
+
+![collection](./packages/nextjs/public/thumbnail.jpg)
 
 ### Artwork
 
