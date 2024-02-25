@@ -1,6 +1,6 @@
 # FundGuys
 
-A Public Goods Funding Platform on Base that rewards funders with Mygologuys NFTs.
+A Public Goods Funding Platform on Base that rewards funders with Mygologuys NFTs!
 
 ## Public Goods Funding Platform
 
