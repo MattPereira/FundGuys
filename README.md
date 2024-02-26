@@ -26,3 +26,7 @@ A Public Goods Funding Platform on Base that rewards funders with Mygologuys NFT
 
 - https://lab.hashlips.io/docs
 - https://www.youtube.com/watch?v=0IRBQ69SkM8
+
+### IPFS upload
+
+ipfs://bafybeidnwjxhpv2xnfczfk7x7zucve3yzvxnjyxuakfm3u7ebghfakpmwe/1.json
