@@ -19,7 +19,7 @@ export function TextField({
   placeholder: undefined | string;
   errors: any;
 }) {
-  let classNames = "h-14 w-full px-4 py-2 border border-base-100 rounded-2xl text-xl bg-base-300";
+  let classNames = "h-14 w-full px-4 py-2 rounded-2xl text-xl bg-base-300";
 
   if (errors) {
     classNames += " border-red-500";
@@ -45,7 +45,7 @@ export function TextField({
           {...register(id, validations)}
         />
       )}
-      <p className="ml-2 text-red-500 font-gothic h-5 m-0">{errors && errors.message}</p>
+      <p className="ml-2 text-red-500 font-gothic h-5 my-1">{errors && errors.message}</p>
     </div>
   );
 }

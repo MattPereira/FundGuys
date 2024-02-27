@@ -4,6 +4,7 @@ import React, { useCallback, useRef, useState } from "react";
 // import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+// import { useAccount } from "wagmi";
 import { BanknotesIcon, Bars3Icon, BugAntIcon, HeartIcon, UserIcon } from "@heroicons/react/24/outline";
 import { SwitchTheme } from "~~/components/SwitchTheme";
 import { FaucetButton, RainbowKitCustomConnectButton } from "~~/components/scaffold-eth";
@@ -39,6 +40,8 @@ export const menuLinks: HeaderMenuLink[] = [
 ];
 
 export const HeaderMenuLinks = () => {
+  // const { address: connectedAddress } = useAccount();
+
   const pathname = usePathname();
 
   return (
@@ -105,7 +108,7 @@ export const Header = () => {
         <Link href="/" passHref className="hidden lg:flex items-center gap-2 ml-4 mr-6 shrink-0">
           <div className="flex relative w-10 h-10 text-3xl">🍄</div>
           <div className="flex flex-col">
-            <span className="font-bold leading-tight text-2xl">FundGuys</span>
+            <span className="font-chewy leading-tight text-3xl">FundGuys</span>
             {/* <span className="text-xs">Public Goods Funding</span> */}
           </div>
         </Link>

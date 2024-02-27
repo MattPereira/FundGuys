@@ -9,7 +9,7 @@ export const CreateCampaign = () => {
   return (
     <>
       <button
-        className="btn btn-lg btn-accent w-60 text-xl"
+        className="btn btn-lg btn-accent w-60 text-2xl font-normal font-cubano"
         onClick={() => {
           const modal = document.getElementById("campaign_modal");
           if (modal instanceof HTMLDialogElement) {
@@ -17,7 +17,7 @@ export const CreateCampaign = () => {
           }
         }}
       >
-        Create Campaign
+        Create
       </button>
       <CreateCampaignModal />
     </>
@@ -63,7 +63,7 @@ const CreateCampaignModal = () => {
     <dialog id="campaign_modal" className="modal">
       <div className="modal-box bg-base-200 border-base-300 border-2 p-8 w-full">
         <div className="flex justify-center items-center mb-5">
-          <h3 className="font-bold text-4xl text-center">Create Campaign</h3>
+          <h3 className="font-normal font-cubano text-4xl text-center">Create</h3>
         </div>
         <form method="dialog" onSubmit={handleSubmit(onSubmit)} noValidate autoComplete="off">
           <TextField
@@ -114,7 +114,10 @@ const CreateCampaignModal = () => {
             errors={errors.birthdate}
           />
 
-          <button onClick={() => console.log("clicked")} className="btn btn-lg btn-accent text-xl w-full mt-5 mb-2">
+          <button
+            onClick={() => console.log("clicked")}
+            className="btn btn-lg btn-accent text-2xl font-normal font-cubano w-full mt-5 mb-2"
+          >
             Submit
           </button>
         </form>
