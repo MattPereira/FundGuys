@@ -1,8 +1,12 @@
+"use client";
+
 import Link from "next/link";
 import type { NextPage } from "next";
 import { BugAntIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+import DonateOrSwap from "~~/components/fundguys/DonateOrSwap";
 
 const Home: NextPage = () => {
+
   return (
     <>
       <div className="flex items-center flex-col flex-grow pt-10">
@@ -11,6 +15,11 @@ const Home: NextPage = () => {
             <span className="block text-2xl mb-2">Welcome to</span>
             <span className="block text-4xl font-bold">Scaffold-ETH 2</span>
           </h1>
+          <DonateOrSwap 
+            btnType="button"
+            title="Donate"
+            styles="btn btn-primary"
+          />
           <p className="text-center text-lg">
             Get started by editing{" "}
             <code className="italic bg-base-300 text-base font-bold max-w-full break-words break-all inline-block">
