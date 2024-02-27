@@ -2,64 +2,55 @@
 
 import Link from "next/link";
 import type { NextPage } from "next";
-import { BugAntIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+
 import DonateOrSwap from "~~/components/fundguys/DonateOrSwap";
+import { CreateCampaign } from "~~/components/fundguys/CreateCampaign";
+
 
 const Home: NextPage = () => {
 
   return (
     <>
-      <div className="flex items-center flex-col flex-grow pt-10">
-        <div className="px-5">
-          <h1 className="text-center mb-8">
-            <span className="block text-2xl mb-2">Welcome to</span>
-            <span className="block text-4xl font-bold">Scaffold-ETH 2</span>
+      <div className="px-5 sm:px-7 md:px-20 my-10">
+        <div>
+          <h1 className="text-center text-6xl font-chewy mb-10">
+            <span className="mr-1">🍄</span>
+            <span className="text-7xl">FundGuys</span>
+            <span className="ml-1">🍄‍🟫</span>
           </h1>
+
           <DonateOrSwap 
             btnType="button"
             title="Donate"
             styles="btn btn-primary"
           />
-          <p className="text-center text-lg">
-            Get started by editing{" "}
-            <code className="italic bg-base-300 text-base font-bold max-w-full break-words break-all inline-block">
-              packages/nextjs/app/page.tsx
-            </code>
-          </p>
-          <p className="text-center text-lg">
-            Edit your smart contract{" "}
-            <code className="italic bg-base-300 text-base font-bold max-w-full break-words break-all inline-block">
-              YourContract.sol
-            </code>{" "}
-            in{" "}
-            <code className="italic bg-base-300 text-base font-bold max-w-full break-words break-all inline-block">
-              packages/hardhat/contracts
-            </code>
+
+          <p className="text-center text-2xl mb-10">
+            A public goods funding platform on Base that rewards funders with Mycologuys NFTs
           </p>
         </div>
+        <div className="flex justify-center gap-8 mb-5">
+          <Link href="/campaigns" className="btn btn-lg btn-primary w-60 text-2xl font-normal font-cubano">
+            Fund
+          </Link>
+          <CreateCampaign />
+        </div>
 
-        <div className="flex-grow bg-base-300 w-full mt-16 px-8 py-12">
-          <div className="flex justify-center items-center gap-12 flex-col sm:flex-row">
-            <div className="flex flex-col bg-base-100 px-10 py-10 text-center items-center max-w-xs rounded-3xl">
-              <BugAntIcon className="h-8 w-8 fill-secondary" />
-              <p>
-                Tinker with your smart contract using the{" "}
-                <Link href="/debug" passHref className="link">
-                  Debug Contract
-                </Link>{" "}
-                tab.
-              </p>
-            </div>
-            <div className="flex flex-col bg-base-100 px-10 py-10 text-center items-center max-w-xs rounded-3xl">
-              <MagnifyingGlassIcon className="h-8 w-8 fill-secondary" />
-              <p>
-                Explore your local transactions with the{" "}
-                <Link href="/blockexplorer" passHref className="link">
-                  Block Explorer
-                </Link>{" "}
-                tab.
-              </p>
-            </div>
+        <div className="mb-10">
+          <h3 className="text-3xl mb-5 font-bold">Recent Campaigns</h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {Array.from(Array(3).keys()).map((_, idx) => (
+              <div key={idx} className="skeleton animate-pulse bg-base-100 rounded-xl w-full h-72"></div>
+            ))}
+          </div>
+        </div>
+
+        <div className="mb-10">
+          <h3 className="text-3xl mb-5 font-bold">Recent Funders</h3>
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            {Array.from(Array(4).keys()).map((_, idx) => (
+              <div key={idx} className="skeleton animate-pulse bg-base-100 rounded-xl w-full h-72"></div>
+            ))}
           </div>
         </div>
       </div>

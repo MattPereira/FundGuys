@@ -1,10 +1,14 @@
+@import url("https://fonts.cdnfonts.com/css/cubano");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Lobster&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Didact+Gothic&family=Chewy&display=swap");
+
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
 :root,
 [data-theme] {
-  background: oklch(var(--b2));
+  background: oklch(var(--b3));
 }
 
 body {
@@ -21,6 +25,10 @@ h4 {
 
 p {
   margin: 1rem 0;
+}
+
+svg {
+  fill: currentColor;
 }
 
 .btn {
