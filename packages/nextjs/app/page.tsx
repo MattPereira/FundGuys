@@ -20,11 +20,21 @@ const Home: NextPage = () => {
         </div>
 
         <div className="mb-10">
-          <h3 className="text-3xl">Latest Campaigns</h3>
+          <h3 className="text-3xl mb-5">Recent Campaigns</h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {Array.from(Array(3).keys()).map((_, idx) => (
+              <div key={idx} className="skeleton animate-pulse bg-base-100 rounded-xl w-full h-72"></div>
+            ))}
+          </div>
         </div>
 
-        <div>
-          <h3 className="text-3xl">Latest Funders</h3>
+        <div className="mb-10">
+          <h3 className="text-3xl mb-5">Recent Funders</h3>
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            {Array.from(Array(4).keys()).map((_, idx) => (
+              <div key={idx} className="skeleton animate-pulse bg-base-100 rounded-xl w-full h-72"></div>
+            ))}
+          </div>
         </div>
       </div>
     </>
