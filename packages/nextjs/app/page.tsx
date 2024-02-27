@@ -1,8 +1,14 @@
+"use client";
+
 import Link from "next/link";
 import type { NextPage } from "next";
+
+import DonateOrSwap from "~~/components/fundguys/DonateOrSwap";
 import { CreateCampaign } from "~~/components/fundguys/CreateCampaign";
 
+
 const Home: NextPage = () => {
+
   return (
     <>
       <div className="px-5 sm:px-7 md:px-20 my-10">
@@ -12,6 +18,13 @@ const Home: NextPage = () => {
             <span className="text-7xl">FundGuys</span>
             <span className="ml-1">🍄‍🟫</span>
           </h1>
+
+          <DonateOrSwap 
+            btnType="button"
+            title="Donate"
+            styles="btn btn-primary"
+          />
+
           <p className="text-center text-2xl mb-10">
             A public goods funding platform on Base that rewards funders with Mycologuys NFTs
           </p>
