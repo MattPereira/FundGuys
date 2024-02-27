@@ -7,16 +7,18 @@ const Home: NextPage = () => {
     <>
       <div className="px-5 sm:px-7 md:px-20 my-10">
         <div>
-          <h1 className="text-center text-6xl font-bold mb-10">🍄FundGuys</h1>
+          <h1 className="text-center text-6xl font-bold mb-10">
+            <span className="mr-1">🍄</span>FundGuys<span className="ml-1">🍄‍🟫</span>
+          </h1>
           <p className="text-center text-2xl mb-10">
             A public goods funding platform on Base that rewards funders with Mycologuys NFTs
           </p>
         </div>
         <div className="flex justify-center gap-8 mb-5">
-          <CreateCampaign />
           <Link href="/campaigns" className="btn btn-lg btn-primary w-60 text-xl">
             Fund Campaign
           </Link>
+          <CreateCampaign />
         </div>
 
         <div className="mb-10">
