@@ -1,7 +1,7 @@
 // import Link from "next/link";
 import type { NextPage } from "next";
 
-const Home: NextPage = () => {
+const Funders: NextPage = () => {
   return (
     <>
       <div className="px-5 sm:px-7 md:px-20 my-10">
@@ -21,4 +21,4 @@ const Home: NextPage = () => {
   );
 };
 
-export default Home;
+export default Funders;

@@ -33,7 +33,7 @@ const CreateCampaignModal = () => {
     reset,
   } = useForm();
 
-  const { writeAsync } = useScaffoldContractWrite({
+  const { writeAsync: createProject } = useScaffoldContractWrite({
     contractName: "PublicGoodsFunding",
     functionName: "createProject",
     args: [undefined, undefined, undefined, undefined, undefined, undefined],
@@ -41,12 +41,11 @@ const CreateCampaignModal = () => {
 
   const onSubmit = async (data: any) => {
     try {
-      console.log("data", data);
+      // convert human-readable date to unix timestamp
       const date = new Date(data.deadline);
-
-      // Convert to Unix timestamp (in seconds)
       const unixTimestamp = BigInt(Math.floor(date.getTime() / 1000));
-      writeAsync({
+      // Write to the contract
+      await createProject({
         args: [connectedAddress, data.name, data.description, data.targetAmount, unixTimestamp, data.image],
       });
       reset(); // clear form inputs
