@@ -112,8 +112,6 @@ export const Header = () => {
             {/* <span className="text-xs">Public Goods Funding</span> */}
           </div>
         </Link>
-      </div>
-      <div className="navbar-center">
         <ul className="hidden lg:flex lg:flex-nowrap menu menu-horizontal px-1 gap-2">
           <HeaderMenuLinks />
         </ul>

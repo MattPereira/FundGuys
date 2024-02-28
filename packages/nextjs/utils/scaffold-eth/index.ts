@@ -5,4 +5,4 @@ export * from "./block";
 export * from "./decodeTxData";
 export * from "./getParsedError";
 // export * from "./baseConstants";
-export * from "./sepoliaConstants"
+export * from "./mumbaiConstants";

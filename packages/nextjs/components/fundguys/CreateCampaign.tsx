@@ -9,7 +9,7 @@ export const CreateCampaign = () => {
   return (
     <>
       <button
-        className="btn btn-lg btn-accent w-60 text-2xl font-normal font-cubano"
+        className="btn btn-lg btn-accent w-48 text-2xl font-normal font-cubano"
         onClick={() => {
           const modal = document.getElementById("campaign_modal");
           if (modal instanceof HTMLDialogElement) {
