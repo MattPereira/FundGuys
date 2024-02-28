@@ -17,12 +17,12 @@ import {
 } from "wagmi";
 import { useScaffoldContractWrite } from "~~/hooks/scaffold-eth";
 import {
-  SEPOLIA_TOKENS,
-  SEPOLIA_TOKENS_BY_SYMBOL,
-  SEPOLIA_TOKENS_BY_ADDRESS,
+  MUMBAI_TOKENS,
+  MUMBAI_TOKENS_BY_SYMBOL,
+  MUMBAI_TOKENS_BY_ADDRESS,
   MAX_ALLOWANCE,
   exchangeProxy,
-} from "../../utils/scaffold-eth/sepoliaConstants";
+} from "../../utils/scaffold-eth/mumbaiConstants";
 import { set } from "nprogress";
 
 interface PriceRequestParams {
@@ -76,7 +76,7 @@ export default function QuoteView({
       setProjectToken(e.target.value);
     }
 
-    const donorTokenDecimals = SEPOLIA_TOKENS_BY_SYMBOL[donorToken]?.decimals;  
+    const donorTokenDecimals = MUMBAI_TOKENS_BY_SYMBOL[donorToken]?.decimals;  
     const { writeAsync } = useScaffoldContractWrite({
       contractName: "PublicGoodsFunding",
       functionName: "donateFunds",
@@ -96,7 +96,7 @@ export default function QuoteView({
         ? parseUnits(sellAmount, donorTokenDecimals).toString()
         : undefined;
   
-    const projectTokenDecimals = SEPOLIA_TOKENS_BY_SYMBOL[projectToken]?.decimals;
+    const projectTokenDecimals = MUMBAI_TOKENS_BY_SYMBOL[projectToken]?.decimals;
   
     const parsedBuyAmount =
       buyAmount && tradeDirection === "buy"
@@ -107,8 +107,8 @@ export default function QuoteView({
       [
         "/api/quote",
         {
-          sellToken: SEPOLIA_TOKENS_BY_SYMBOL[donorToken]?.address,
-          buyToken: SEPOLIA_TOKENS_BY_SYMBOL[projectToken]?.address,
+          sellToken: MUMBAI_TOKENS_BY_SYMBOL[donorToken]?.address,
+          buyToken: MUMBAI_TOKENS_BY_SYMBOL[projectToken]?.address,
           sellAmount: parsedSellAmount,
           buyAmount: parsedBuyAmount,
           takerAddress,
@@ -132,7 +132,7 @@ export default function QuoteView({
   
     const { data, isError, isLoading } = useBalance({
       address: takerAddress,
-      token: SEPOLIA_TOKENS_BY_SYMBOL[donorToken]?.address,
+      token: MUMBAI_TOKENS_BY_SYMBOL[donorToken]?.address,
     });
 
   
@@ -156,7 +156,7 @@ export default function QuoteView({
                       <img
                         alt={donorToken}
                         className="h-9 w-9 mr-2 rounded-md"
-                        src={SEPOLIA_TOKENS_BY_SYMBOL[donorToken]?.logoURI}
+                        src={MUMBAI_TOKENS_BY_SYMBOL[donorToken]?.logoURI}
                       />
                       <div className="h-14 sm:w-full sm:mr-2">
                         <select
@@ -167,7 +167,7 @@ export default function QuoteView({
                           onChange={handleDonorTokenChange}
                         >
                           {/* <option value="">--Choose a token--</option> */}
-                          {SEPOLIA_TOKENS.map((token) => {
+                          {MUMBAI_TOKENS.map((token) => {
                             return (
                               <option
                                 key={token.address}
@@ -196,7 +196,7 @@ export default function QuoteView({
                       <img
                         alt={projectToken}
                         className="h-9 w-9 mr-2 rounded-md"
-                        src={SEPOLIA_TOKENS_BY_SYMBOL[projectToken]?.logoURI}
+                        src={MUMBAI_TOKENS_BY_SYMBOL[projectToken]?.logoURI}
                       />
                       <select
                         name="buy-token-select"
@@ -206,7 +206,7 @@ export default function QuoteView({
                         onChange={(e) => handleProjectTokenChange(e)}
                       >
                         {/* <option value="">--Choose a token--</option> */}
-                        {SEPOLIA_TOKENS.map((token) => {
+                        {MUMBAI_TOKENS.map((token) => {
                           return (
                             <option key={token.address} value={token.symbol.toLowerCase()}>
                               {token.symbol}
@@ -257,7 +257,7 @@ export default function QuoteView({
   
         {takerAddress && isSwap ? (
           <ApproveOrReviewButton
-            sellTokenAddress={SEPOLIA_TOKENS_BY_SYMBOL[donorToken]?.address}
+            sellTokenAddress={MUMBAI_TOKENS_BY_SYMBOL[donorToken]?.address}
             takerAddress={takerAddress}
             onClick={() => {
               setFinalize(true);
