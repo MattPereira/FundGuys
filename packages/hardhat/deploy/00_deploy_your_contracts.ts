@@ -22,7 +22,7 @@ const deployYourContract: DeployFunction = async function (hre: HardhatRuntimeEn
   const { deployer } = await hre.getNamedAccounts();
   const { deploy } = hre.deployments;
 
-  await deploy("MycoloGuys", {
+  await deploy("Mycologuys", {
     from: deployer,
     // Contract constructor arguments
     args: [],
@@ -32,15 +32,42 @@ const deployYourContract: DeployFunction = async function (hre: HardhatRuntimeEn
     autoMine: true,
   });
 
+  const mycologuys = await hre.ethers.getContract<Contract>("Mycologuys", deployer);
+
   await deploy("PublicGoodsFunding", {
     from: deployer,
     // Contract constructor arguments
-    args: [],
+    args: [mycologuys.target],
     log: true,
     // autoMine: can be passed to the deploy function to make the deployment process faster on local networks by
     // automatically mining the contract deployment transaction. There is no effect on live networks.
     autoMine: true,
   });
+
+  // Get the deployed contract to interact with it after deploying.
+  const publicGoodsFunding = await hre.ethers.getContract<Contract>("PublicGoodsFunding", deployer);
+
+  // transfer ownership to restrict nft minting to only the PublicGoodsFunding contract
+  await mycologuys.transferOwnership(publicGoodsFunding.target);
+
+  // Convert date "2024-05-05" to Unix timestamp
+  const title = "FundGuys";
+  const description = "A public goods funding platform on Base that rewards funders with Mycologuys NFTs";
+  const usdcContractAddress = "0x3c499c542cef5e3811e1192ce70d8cc03d5c3359";
+  const targetAmount = 420;
+  const date = new Date("2024-05-05");
+  const unixTimestamp = Math.floor(date.getTime() / 1000);
+  const imageUrl =
+    "https://lirp.cdn-website.com/73732851/dms3rep/multi/opt/defi-for-good-logo-circle-blue-white-text-v1-432w.png";
+
+  await publicGoodsFunding.createProject(
+    title,
+    description,
+    usdcContractAddress,
+    targetAmount,
+    unixTimestamp,
+    imageUrl,
+  );
 };
 
 export default deployYourContract;

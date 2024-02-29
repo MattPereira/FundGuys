@@ -7,7 +7,7 @@ import { useFetchNFTs } from "~~/hooks/fundguys/useFetchNFTs";
 import { useDeployedContractInfo } from "~~/hooks/scaffold-eth/";
 
 const Funders: NextPage = () => {
-  const { data: mycologuysContract } = useDeployedContractInfo("MycoloGuys");
+  const { data: mycologuysContract } = useDeployedContractInfo("Mycologuys");
 
   const { nfts, isLoading, error } = useFetchNFTs(mycologuysContract?.address || "");
 
