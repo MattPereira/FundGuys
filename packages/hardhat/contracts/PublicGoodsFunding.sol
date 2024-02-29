@@ -13,7 +13,7 @@ contract PublicGoodsFunding {
 	function createProject(
 		string memory projectTitle,
 		string memory projectDescription,
-		address projectTokenAddress, // this shouldnt be a parameter. we should control which addresses can be assigned
+		address projectTokenAddress, // this shouldnt be a parameter. we should eventually control which addresses can be assigned to
 		uint256 targetAmount,
 		uint256 deadline,
 		string memory image
