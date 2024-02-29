@@ -69,6 +69,7 @@ contract Project {
 			public
 			payable // Must attach ETH equal to the `value` field from the API response.
 	{
+			require(projectTokenAddress != address(0), "Project only accepts contributions in ETH");
 			uint256 startingBalance = buyToken.balanceOf(address(this));
 
 			sellToken.transferFrom(msg.sender, address(this), amount);
