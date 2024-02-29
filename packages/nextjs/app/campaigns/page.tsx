@@ -2,7 +2,7 @@
 
 // import Link from "next/link";
 import type { NextPage } from "next";
-import { CampaignCard } from "~~/components/fundguys/CampgainCard";
+import { CampaignCard } from "~~/components/fundguys/CampaignCard";
 import { CreateCampaign } from "~~/components/fundguys/CreateCampaign";
 import { useScaffoldEventHistory } from "~~/hooks/scaffold-eth";
 
@@ -28,13 +28,10 @@ const Campaigns: NextPage = () => {
             Array.from(Array(6).keys()).map((_, idx) => (
               <div key={idx} className="skeleton animate-pulse bg-base-100 rounded-xl w-full h-72"></div>
             ))}
-          {data?.map(({ args: { projectAddress } }) =>
-            projectAddress ? (
+          {data &&
+            data?.map(({ args: { projectAddress } }) => (
               <CampaignCard key={projectAddress} contractAddress={projectAddress} />
-            ) : (
-              <div key={projectAddress} />
-            ),
-          )}
+            ))}
         </div>
       </div>
     </>
