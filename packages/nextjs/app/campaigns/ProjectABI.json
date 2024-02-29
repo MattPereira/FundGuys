@@ -1,0 +1,159 @@
+[
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_publicGoodsFundingAddress",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_projectOwner",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_projectTokenAddress",
+        "type": "address"
+      },
+      {
+        "internalType": "string",
+        "name": "_projectTitle",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_projectDescription",
+        "type": "string"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_targetAmount",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_deadline",
+        "type": "uint256"
+      },
+      {
+        "internalType": "string",
+        "name": "_image",
+        "type": "string"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "contributor",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "Contribution",
+    "type": "event"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      },
+      {
+        "internalType": "contract IERC20",
+        "name": "sellToken",
+        "type": "address"
+      },
+      {
+        "internalType": "contract IERC20",
+        "name": "buyToken",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "spender",
+        "type": "address"
+      },
+      {
+        "internalType": "address payable",
+        "name": "swapTarget",
+        "type": "address"
+      },
+      {
+        "internalType": "bytes",
+        "name": "swapCallData",
+        "type": "bytes"
+      }
+    ],
+    "name": "donateToken",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getProject",
+    "outputs": [
+      {
+        "internalType": "string",
+        "name": "",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "",
+        "type": "string"
+      },
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "withdrawFunds",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "stateMutability": "payable",
+    "type": "receive"
+  }
+]
