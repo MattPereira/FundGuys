@@ -11,7 +11,7 @@ contract PublicGoodsFunding is Ownable {
 	mapping(address => bool) projects;
 
 	//Events
-	event ProjectCreated(address projectAddress);
+	event ProjectCreated(address projectAddress, address projectOwner);
 	event NFTMinted(address projectAddress, address contributor);
 
 	// Functions
@@ -45,7 +45,7 @@ contract PublicGoodsFunding is Ownable {
 			deadline,
 			image
 		);
-		emit ProjectCreated(address(project));
+		emit ProjectCreated(address(project), msg.sender);
 	}
 
 	function mintToFunder() public {
