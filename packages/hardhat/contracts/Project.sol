@@ -53,6 +53,34 @@ contract Project {
 		_handleDonation(msg.sender, msg.value);
 	}
 
+	function donateToken(
+			uint256 amount,
+			// The `sellTokenAddress` field from the API response.
+			IERC20 sellToken,
+			// The `buyTokenAddress` field from the API response.
+			IERC20 buyToken,
+			// The `allowanceTarget` field from the API response.
+			address spender,
+			// The `to` field from the API response.
+			address payable swapTarget,
+			// The `data` field from the API response.
+			bytes calldata swapCallData
+	)
+			public
+			payable // Must attach ETH equal to the `value` field from the API response.
+	{
+			uint256 startingBalance = buyToken.balanceOf(address(this));
+
+			sellToken.transferFrom(msg.sender, address(this), amount);
+			require(sellToken.approve(spender, type(uint256).max), "Failed to approve");
+
+			(bool success,) = swapTarget.call{value: msg.value}(swapCallData);
+			require(success, 'SWAP_CALL_FAILED');
+
+			uint256 endingBalance = buyToken.balanceOf(address(this));
+			_handleDonation(msg.sender, (endingBalance - startingBalance));
+	}
+
 	function _handleDonation(address contributor, uint256 amount) private {
 		if (contributions[contributor] == 0) {
 			contributions[contributor] = amount;
@@ -66,23 +94,23 @@ contract Project {
 		emit Contribution(contributor, amount);
 	}
 
-	// function withdrawFunds() public onlyOwner {
-	// 	require(
-	// 		address(this).balance >= targetAmount ||
-	// 			block.timestamp >= deadline,
-	// 		"Project funding goals have not been reached"
-	// 	);
-	// 	if (projectTokenAddress == address(0)) {
-	// 		// withdraw ETH
-	// 		(bool success, ) = msg.sender.call{ value: address(this).balance }("");
-	// 		require(success, "Failed to withdraw funds");
-	// 	} else {
-	// 		// withdraw tokens
-	// 		IERC20 token = IERC20(projectTokenAddress);
-
-	// 	}
-	// 	completed = true;
-	// }
+	function withdrawFunds() public onlyOwner {
+		require(
+			amountRaised >= targetAmount ||
+				block.timestamp >= deadline,
+			"Project funding goals have not been reached"
+		);
+		if (projectTokenAddress == address(0)) {
+			// withdraw ETH
+			(bool success, ) = msg.sender.call{ value: address(this).balance }("");
+			require(success, "Failed to withdraw funds");
+		} else {
+			// withdraw tokens
+			IERC20 token = IERC20(projectTokenAddress);
+			token.transfer(msg.sender, amountRaised);
+		}
+		completed = true;
+	}
 
 	///////////////////////////////////////////
 	/////////// GETTER FUNCTIONS //////////////
