@@ -1,15 +1,27 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-import './Project.sol';
+import { Project } from "./Project.sol";
+import { Mycologuys } from "./Mycologuys.sol";
+import { Ownable } from "@openzeppelin/contracts/access/Ownable.sol";
 
-contract PublicGoodsFunding {
-	mapping (address => bool) projects;
+contract PublicGoodsFunding is Ownable {
+	// State variables
+	Mycologuys nftContract;
+	mapping(address => bool) projects;
 
+	//Events
 	event ProjectCreated(address projectAddress);
 	event NFTMinted(address projectAddress, address contributor);
 
-	// create public goods project campaign
+	// Functions
+	constructor(Mycologuys _nftContract) {
+		nftContract = _nftContract;
+	}
+
+	/**
+	 * Create public goods project campaign
+	 */
 	function createProject(
 		string memory projectTitle,
 		string memory projectDescription,
@@ -27,19 +39,25 @@ contract PublicGoodsFunding {
 			address(this),
 			msg.sender,
 			projectTokenAddress,
-			projectTitle,			
+			projectTitle,
 			projectDescription,
 			targetAmount,
 			deadline,
 			image
 		);
-
 		emit ProjectCreated(address(project));
 	}
 
-	function mintNFT() public {
-		require(projects[msg.sender], 'Must be a valid project');
-		// mint NFT
+	function mintToFunder() public {
+		require(
+			projects[msg.sender],
+			"Only campaign project contracts can mint NFTs"
+		);
+		nftContract.mintNft();
 		emit NFTMinted(msg.sender, tx.origin);
+	}
+
+	function setNewBaseUri(string memory _baseUri) public onlyOwner {
+		nftContract.setBaseUri(_baseUri);
 	}
 }

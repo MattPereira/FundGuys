@@ -12,13 +12,13 @@ const imageUrl = `${baseUrl}/thumbnail.jpg`;
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
   title: {
-    default: "🍄 FundGuys",
+    default: "FundGuys",
     template: "%s | Scaffold-ETH 2",
   },
   description: "A public goods funding platform on Base that rewards funders with Mycologuys NFTs",
   openGraph: {
     title: {
-      default: "🍄 FundGuys",
+      default: "FundGuys",
       template: "%s | Scaffold-ETH 2",
     },
     description: "A public goods funding platform on Base that rewards funders with Mycologuys NFTs",
@@ -32,10 +32,10 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     images: [imageUrl],
     title: {
-      default: "Scaffold-ETH 2",
+      default: "FundGuys",
       template: "%s | Scaffold-ETH 2",
     },
-    description: "Built with 🏗 Scaffold-ETH 2",
+    description: "A public goods funding platform on Base that rewards funders with Mycologuys NFTs",
   },
   icons: {
     icon: [{ url: "/favicon.png", sizes: "32x32", type: "image/png" }],

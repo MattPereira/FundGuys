@@ -2,7 +2,7 @@
 pragma solidity ^0.8.20;
 
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
-import './PublicGoodsFunding.sol';
+import "./PublicGoodsFunding.sol";
 
 contract Project {
 	address publicGoodsFundingAddress;
@@ -40,16 +40,16 @@ contract Project {
 	}
 
 	modifier onlyOwner() {
-		require(
-			msg.sender == projectOwner,
-			"You are not project owner"
-		);
+		require(msg.sender == projectOwner, "You are not project owner");
 		_;
 	}
 
 	receive() external payable {
 		require(completed == false, "Project is completed");
-		require(projectTokenAddress == address(0), "Project does not accept contributions in ETH");
+		require(
+			projectTokenAddress == address(0),
+			"Project does not accept contributions in ETH"
+		);
 		_handleDonation(msg.sender, msg.value);
 	}
 
@@ -85,8 +85,10 @@ contract Project {
 	function _handleDonation(address contributor, uint256 amount) private {
 		if (contributions[contributor] == 0) {
 			contributions[contributor] = amount;
-			PublicGoodsFunding publicGoodsFunding = PublicGoodsFunding(publicGoodsFundingAddress);	
-			publicGoodsFunding.mintNFT();
+			PublicGoodsFunding publicGoodsFunding = PublicGoodsFunding(
+				publicGoodsFundingAddress
+			);
+			publicGoodsFunding.mintToFunder();
 		} else {
 			contributions[contributor] += amount;
 		}
@@ -117,15 +119,19 @@ contract Project {
 	/////////// GETTER FUNCTIONS //////////////
 	///////////////////////////////////////////
 
-	function getProject() public view returns (
-		string memory,
-		string memory,
-		string memory,
-		uint256,
-		uint256,
-		uint256,
-		bool
-	) {
+	function getProject()
+		public
+		view
+		returns (
+			string memory,
+			string memory,
+			string memory,
+			uint256,
+			uint256,
+			uint256,
+			bool
+		)
+	{
 		return (
 			projectTitle,
 			projectDescription,

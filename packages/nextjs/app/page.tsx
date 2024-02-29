@@ -3,18 +3,30 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { NextPage } from "next";
-import { CreateCampaign, SkeletonLoader } from "~~/components/fundguys/";
+import { CampaignCard, CreateCampaign, SkeletonLoader } from "~~/components/fundguys/";
 import { useFetchNFTs } from "~~/hooks/fundguys/useFetchNFTs";
-import { useDeployedContractInfo } from "~~/hooks/scaffold-eth/";
+import { useDeployedContractInfo, useScaffoldEventHistory } from "~~/hooks/scaffold-eth/";
 
 const Home: NextPage = () => {
-  const { data: mycologuysContract } = useDeployedContractInfo("MycoloGuys");
+  const { data: mycologuysContract } = useDeployedContractInfo("Mycologuys");
 
   const { nfts, isLoading, error } = useFetchNFTs(mycologuysContract?.address || "");
 
   if (error) {
     console.log("nftsError", error);
   }
+
+  const { data: events, isLoading: isLoadingEvents } = useScaffoldEventHistory({
+    contractName: "PublicGoodsFunding",
+    eventName: "ProjectCreated",
+    fromBlock: 31231n,
+    watch: true,
+    blockData: true,
+    transactionData: true,
+    receiptData: true,
+  });
+
+  console.log("events", events);
 
   return (
     <>
@@ -23,7 +35,6 @@ const Home: NextPage = () => {
           <h1 className="text-center text-6xl font-chewy mb-10">
             <span className="mr-1">🍄</span>
             <span className="text-7xl">FundGuys</span>
-            <span className="ml-1">🍄‍🟫</span>
           </h1>
 
           <p className="text-center text-2xl mb-10">
@@ -40,7 +51,13 @@ const Home: NextPage = () => {
         <div className="mb-10">
           <h3 className="text-3xl mb-5 font-bold">Recent Campaigns</h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <SkeletonLoader numberOfItems={3} />
+            {isLoadingEvents || !events ? (
+              <SkeletonLoader numberOfItems={3} />
+            ) : (
+              events.map((event: any, idx: number) => (
+                <CampaignCard key={idx} contractAddress={event.args.projectAddress} />
+              ))
+            )}
           </div>
         </div>
 
