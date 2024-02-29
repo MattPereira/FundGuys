@@ -8,7 +8,7 @@ export async function GET(request: NextRequest) {
     // .getAll method grabs all query params with key of "collection" !!! :)
     const collectionAddress = searchParams.getAll("collection");
 
-    const alchemyBaseUrl = "https://polygon-mumbai.g.alchemy.com/nft/v3/";
+    const alchemyBaseUrl = "https://eth-sepolia.g.alchemy.com/nft/v3/";
 
     const response = await axios.get(`${alchemyBaseUrl}${process.env.ALCHEMY_API_KEY}/getNFTsForOwner`, {
       params: {

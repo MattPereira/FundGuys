@@ -41,12 +41,6 @@ const Home: NextPage = () => {
             A public goods funding platform on Base that rewards funders with Mycologuys NFTs
           </p>
         </div>
-        <div className="flex justify-center gap-8 mb-5">
-          <Link href="/campaigns" className="btn btn-lg btn-primary w-48 text-2xl font-normal font-cubano">
-            Fund
-          </Link>
-          <CreateCampaign />
-        </div>
 
         <div className="mb-10">
           <h3 className="text-3xl mb-5 font-bold">Recent Campaigns</h3>
