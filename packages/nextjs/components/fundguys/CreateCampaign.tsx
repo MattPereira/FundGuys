@@ -1,11 +1,17 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { TextField } from "~~/components/fundguys/TextField";
 import { useScaffoldContractWrite } from "~~/hooks/scaffold-eth";
 
 export const CreateCampaign = () => {
-  return (
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+  return isClient ? (
     <>
       <button
         className="link link-accent text-2xl"
@@ -20,6 +26,8 @@ export const CreateCampaign = () => {
       </button>
       <CreateCampaignModal />
     </>
+  ) : (
+    "loading..."
   );
 };
 
