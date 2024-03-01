@@ -70,10 +70,7 @@ export const CampaignCard = ({ contractAddress, isProfilePage }: ICampaignCard) 
   };
 
   return (
-    <Link
-      href={`/campaigns/${contractAddress}`}
-      className="bg-base-200 rounded-xl cursor-pointer transition-transform transform hover:scale-105 hover:shadow-lg hover:shadow-base-200"
-    >
+    <div className="bg-base-200 rounded-xl cursor-pointer transition-transform transform hover:scale-102 hover:shadow-lg hover:shadow-base-200">
       <div className="flex justify-center">
         <img src={image} alt={title} className="w-full h-60 overflow-hidden object-cover rounded-lg" />
       </div>
@@ -92,21 +89,24 @@ export const CampaignCard = ({ contractAddress, isProfilePage }: ICampaignCard) 
         </div>
 
         <div className="grid grid-cols-2 gap-5">
-          <button onClick={handleShare} className="btn btn-accent w-full font-cubano font-normal text-xl">
-            Share
-          </button>
+          <Link
+            href={`/campaigns/${contractAddress}`}
+            className="btn btn-primary w-full font-cubano font-normal text-xl"
+          >
+            Details
+          </Link>
           {isProfilePage ? (
             <button onClick={() => write({})} className="btn btn-primary  w-full font-cubano font-normal text-xl">
               Withdraw
             </button>
           ) : (
-            <button className="btn btn-primary  w-full font-cubano font-normal text-xl" onClick={openModal}>
+            <button className="btn btn-accent  w-full font-cubano font-normal text-xl" onClick={openModal}>
               Donate
             </button>
           )}
         </div>
       </div>
       <DonateModal projectTokenAddress={projectTokenAddress} projectAddress={contractAddress} />
-    </Link>
+    </div>
   );
 };

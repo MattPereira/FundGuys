@@ -23,12 +23,36 @@ export default function CampaignDetailsPage({ params }: { params: { address: str
 
   const deadlineDate = new Date(Number(deadline) * 1000);
 
+  const handleShare = () => {
+    // if (events && events.length > 0) {
+    // const projectOwnerAddress = events[0].args.projectOwner;
+    // const truncatedOwner = `${projectOwnerAddress?.slice(0, 2)}...${projectOwnerAddress?.slice(-4)}`;
+    // const text = `Owner (${truncatedOwner}) would like your help with their campaign: ${title}. Take a moment to hear their story.`;
+    const text = `Take a moment to hear about the stories from the Fund Guys Community 🍄`;
+    const url = "https://fund-guys.vercel.app/campaigns"; // Replace with your campaign link
+    const warpcastUrl = `https://warpcast.com/~/compose?text=${encodeURIComponent(text)}&embeds[]=${encodeURIComponent(
+      url,
+    )}`;
+
+    window.open(warpcastUrl, "_blank");
+    // } else {
+    //   console.log("No events found")
+    // }
+  };
+
   return (
     <>
       <div className="px-5 sm:px-7 md:px-20 my-10">
         <h3 className="text-7xl text-center font-madimi mb-10">Campaign Details</h3>
+
         <div>
           <img src={image} alt={title} className="w-full h-96 overflow-hidden object-cover rounded-lg mb-10" />
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
+          <button onClick={handleShare} className="btn btn-primary w-full font-cubano font-normal text-xl">
+            Share
+          </button>
+          <button className="btn-accent btn w-full font-cubano font-normal text-xl">Donate</button>
         </div>
         <div className="overflow-x-auto border border-white rounded-lg">
           <table className="table ">
@@ -54,6 +78,7 @@ export default function CampaignDetailsPage({ params }: { params: { address: str
               </tr>
             </tbody>
           </table>
+          bu
         </div>
       </div>
     </>
