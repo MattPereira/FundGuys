@@ -20,8 +20,6 @@ export const ProfileCard = ({ contractAddress }: Props) => {
   })
   const {
     data: projectData,
-    isLoading,
-    isError,
   } = useContractRead({
     address: contractAddress,
     abi: ProjectABI,
@@ -31,13 +29,15 @@ export const ProfileCard = ({ contractAddress }: Props) => {
   const {
     data: events, 
     isLoading: isLoadingEvents, 
-    error: errorReadingEvents} = useScaffoldEventHistory({
+    } = useScaffoldEventHistory({
     contractName: "PublicGoodsFunding",
     eventName: "ProjectCreated",
-    fromBlock: 31231n,
+    fromBlock: 43030910n,
     watch: true,
     filters: {projectOwner: connectedAddress},
   });
+
+  
 
   if (isLoadingEvents) return <div className="skeleton animate-pulse bg-base-100 rounded-xl w-full h-72"></div>;
   if (!isLoadingEvents || contractAddress === undefined) return <h1>Failed to fetch Profile data</h1>;
