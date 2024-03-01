@@ -25,8 +25,6 @@ const Home: NextPage = () => {
     receiptData: true,
   });
 
-  console.log("events", events);
-
   return (
     <>
       <div className="px-5 sm:px-7 md:px-20 my-10">
@@ -43,7 +41,7 @@ const Home: NextPage = () => {
 
         <div className="mb-10">
           <h3 className="text-3xl mb-5 font-bold">Recent Campaigns</h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
             {isLoadingEvents || !events ? (
               <SkeletonLoader numberOfItems={3} />
             ) : (

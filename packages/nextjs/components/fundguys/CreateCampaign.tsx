@@ -1,15 +1,20 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useAccount } from "wagmi";
 import { TextField } from "~~/components/fundguys/TextField";
 import { useScaffoldContractWrite } from "~~/hooks/scaffold-eth";
 
 export const CreateCampaign = () => {
-  return (
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+  return isClient ? (
     <>
       <button
-        className="btn btn-lg btn-accent w-48 text-2xl font-normal font-cubano"
+        className="link link-accent text-2xl"
         onClick={() => {
           const modal = document.getElementById("campaign_modal");
           if (modal instanceof HTMLDialogElement) {
@@ -17,15 +22,16 @@ export const CreateCampaign = () => {
           }
         }}
       >
-        Create
+        create your own
       </button>
       <CreateCampaignModal />
     </>
+  ) : (
+    "loading..."
   );
 };
 
 const CreateCampaignModal = () => {
-  const { address: connectedAddress } = useAccount();
   const {
     register,
     handleSubmit,
@@ -43,10 +49,17 @@ const CreateCampaignModal = () => {
     try {
       // convert human-readable date to unix timestamp
       const date = new Date(data.deadline);
-      const unixTimestamp = BigInt(Math.floor(date.getTime() / 1000));
+      const deadline = BigInt(Math.floor(date.getTime() / 1000));
       // Write to the contract
       await createProject({
-        args: [connectedAddress, data.name, data.description, data.targetAmount, unixTimestamp, data.image],
+        args: [
+          data.name,
+          data.description,
+          "0xfFf9976782d46CC05630D1f6eBAb18b2324d6B14".toLowerCase(), // HARDCODED wETH MUST CHANGE FOR BASE
+          data.targetAmount,
+          deadline,
+          data.image,
+        ],
       });
       reset(); // clear form inputs
 

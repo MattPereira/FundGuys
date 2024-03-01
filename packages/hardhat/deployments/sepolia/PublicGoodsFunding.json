@@ -235,7 +235,7 @@
         "type": "t_address"
       },
       {
-        "astId": 3183,
+        "astId": 3186,
         "contract": "contracts/PublicGoodsFunding.sol:PublicGoodsFunding",
         "label": "nftContract",
         "offset": 0,
@@ -243,7 +243,7 @@
         "type": "t_contract(Mycologuys)2805"
       },
       {
-        "astId": 3187,
+        "astId": 3190,
         "contract": "contracts/PublicGoodsFunding.sol:PublicGoodsFunding",
         "label": "projects",
         "offset": 0,

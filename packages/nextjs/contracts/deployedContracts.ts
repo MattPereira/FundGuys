@@ -530,13 +530,13 @@ const deployedContracts = {
           anonymous: false,
           inputs: [
             {
-              indexed: false,
+              indexed: true,
               internalType: "address",
               name: "projectAddress",
               type: "address",
             },
             {
-              indexed: false,
+              indexed: true,
               internalType: "address",
               name: "projectOwner",
               type: "address",
