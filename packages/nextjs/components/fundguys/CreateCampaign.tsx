@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { parseEther } from "viem";
 import { TextField } from "~~/components/fundguys/TextField";
 import { useScaffoldContractWrite } from "~~/hooks/scaffold-eth";
 
@@ -56,7 +57,7 @@ const CreateCampaignModal = () => {
           data.name,
           data.description,
           "0xfFf9976782d46CC05630D1f6eBAb18b2324d6B14".toLowerCase(), // HARDCODED wETH MUST CHANGE FOR BASE
-          data.targetAmount,
+          parseEther(data.targetAmount),
           deadline,
           data.image,
         ],

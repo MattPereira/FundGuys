@@ -2,7 +2,8 @@
 
 import { DonateModal } from "./DonateModal";
 import { Address, formatUnits, parseAbi } from "viem";
-import { useContractRead, useContractWrite } from "wagmi";
+import { useContractRead, useContractWrite, useAccount } from "wagmi";
+import { useScaffoldEventHistory } from "~~/hooks/scaffold-eth";
 import ProjectABI from "~~/app/campaigns/ProjectABI.json";
 
 interface ICampaignCard {
@@ -11,7 +12,8 @@ interface ICampaignCard {
 }
 
 export const CampaignCard = ({ contractAddress, isProfilePage }: ICampaignCard) => {
-  const openModal = () => document.getElementById("donate_modal").showModal();
+  const connectedAddress = useAccount();
+  const openModal = () => document.getElementById("donate_modal")?.showModal();
 
   const { data: projectData = [], isLoading } = useContractRead({
     address: contractAddress,
@@ -25,6 +27,17 @@ export const CampaignCard = ({ contractAddress, isProfilePage }: ICampaignCard) 
     functionName: "withdrawFunds",
   });
 
+  // const { data: events, isLoading: isLoadingEvents } = useScaffoldEventHistory({
+  //   contractName: "PublicGoodsFunding",
+  //   eventName: "ProjectCreated",
+  //   fromBlock: 0n, // 43030910n,
+    // filters: {
+    //   projectOwner: connectedAddress,
+    // },
+  //   transactionData: true,
+  //   receiptData: true,
+  // });
+
   if (isLoading) return <div className="skeleton animate-pulse bg-base-100 rounded-xl w-full h-72"></div>;
 
   console.log({ projectData });
@@ -37,6 +50,23 @@ export const CampaignCard = ({ contractAddress, isProfilePage }: ICampaignCard) 
   const currentDate = new Date();
   const timeRemaining = deadlineDate.getTime() - currentDate.getTime();
   const daysRemaining = Math.ceil(timeRemaining / (1000 * 60 * 60 * 24));
+
+  const handleShare = () => {
+    // if (events && events.length > 0) {
+    // const projectOwnerAddress = events[0].args.projectOwner;
+    // const truncatedOwner = `${projectOwnerAddress?.slice(0, 2)}...${projectOwnerAddress?.slice(-4)}`;
+    // const text = `Owner (${truncatedOwner}) would like your help with their campaign: ${title}. Take a moment to hear their story.`;
+    const text = `Take a moment to hear about the stories from the Fund Guys Community 🍄`
+    const url = "https://fund-guys.vercel.app/campaigns"; // Replace with your campaign link
+    const warpcastUrl = `https://warpcast.com/~/compose?text=${encodeURIComponent(text)}&embeds[]=${encodeURIComponent(
+      url,
+    )}`;
+
+    window.open(warpcastUrl, "_blank");
+    // } else {
+    //   console.log("No events found")
+    // }
+  };
 
   return (
     <div className="bg-base-200 rounded-xl">

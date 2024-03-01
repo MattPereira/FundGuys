@@ -17,7 +17,8 @@ const Profile: NextPage = () => {
     filters: {
       projectOwner: connectedAddress,
     },
-    watch: true,
+    transactionData:true,
+    receiptData:true,
     enabled: true,
   });
 
