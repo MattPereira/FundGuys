@@ -7,7 +7,7 @@ import { GenericContractsDeclaration } from "~~/utils/scaffold-eth/contract";
 const deployedContracts = {
   31337: {
     Mycologuys: {
-      address: "0x0DCd1Bf9A1b36cE34237eEaFef220932846BCD82",
+      address: "0x5FbDB2315678afecb367f032d93F642f64180aa3",
       abi: [
         {
           inputs: [],
@@ -475,7 +475,7 @@ const deployedContracts = {
       },
     },
     PublicGoodsFunding: {
-      address: "0x9A676e781A523b5d0C0e43731313A708CB607508",
+      address: "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
       abi: [
         {
           inputs: [
@@ -1285,7 +1285,7 @@ const deployedContracts = {
   },
   11155111: {
     Mycologuys: {
-      address: "0x629354294988DA87aa2572388f14cf5eC9eCBAe7",
+      address: "0x88cdc621911B00dA11997bA67152D7fC8e742B4e",
       abi: [
         {
           inputs: [],
@@ -1753,7 +1753,7 @@ const deployedContracts = {
       },
     },
     PublicGoodsFunding: {
-      address: "0x49595B1c51C097E7f26daB6142165BD78D208f3F",
+      address: "0xd7BEea4eEb428540585653f3d04ca97FD2D33445",
       abi: [
         {
           inputs: [
@@ -1808,13 +1808,13 @@ const deployedContracts = {
           anonymous: false,
           inputs: [
             {
-              indexed: false,
+              indexed: true,
               internalType: "address",
               name: "projectAddress",
               type: "address",
             },
             {
-              indexed: false,
+              indexed: true,
               internalType: "address",
               name: "projectOwner",
               type: "address",

@@ -1,33 +1,82 @@
 "use client";
 
-// import Link from "next/link";
+import Image from "next/image";
 import type { NextPage } from "next";
-import { ProfileCard } from "~~/components/fundguys/ProfileCard";
-import { useScaffoldEventHistory } from "~~/hooks/scaffold-eth";
+import { useAccount } from "wagmi";
+import { CampaignCard, SkeletonLoader } from "~~/components/fundguys/";
+import { useFetchNFTs } from "~~/hooks/fundguys/useFetchNFTs";
+import { useDeployedContractInfo, useScaffoldEventHistory } from "~~/hooks/scaffold-eth/";
 
 const Profile: NextPage = () => {
-  const { data, isLoading } = useScaffoldEventHistory({
+  const { data: mycologuysContract } = useDeployedContractInfo("Mycologuys");
+  const { address: connectedAddress } = useAccount();
+
+  const { nfts, isLoading, error } = useFetchNFTs(mycologuysContract?.address || "");
+
+  if (error) {
+    console.log("nftsError", error);
+  }
+
+  const { data: events, isLoading: isLoadingEvents } = useScaffoldEventHistory({
     contractName: "PublicGoodsFunding",
     eventName: "ProjectCreated",
-    fromBlock: 0n, // can be set to the block in which we deploy on Base
+    fromBlock: 31231n,
+    filters: { projectOwner: connectedAddress },
+    watch: true,
+    blockData: true,
+    transactionData: true,
+    receiptData: true,
   });
+
+  console.log("events", events);
+
   return (
     <>
       <div className="px-5 sm:px-7 md:px-20 my-10">
-        <h3 className="text-6xl text-center font-bold">Profile</h3>
-        <p className="text-center text-2xl my-10">
-          Browse all active Profile to find a cause you want to support or create your own campaign.
-        </p>
+        <div>
+          <h1 className="text-center text-6xl font-chewy mb-10">
+            <span className="mr-1">🍄</span>
+            <span className="text-7xl">FundGuys</span>
+          </h1>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {isLoading &&
-            Array.from(Array(6).keys()).map((_, idx) => (
-              <div key={idx} className="skeleton animate-pulse bg-base-100 rounded-xl w-full h-72"></div>
-            ))}
-          {data &&
-            data?.map(({ args: { projectAddress } }) => (
-              <ProfileCard key={projectAddress} contractAddress={projectAddress} />
-            ))}
+          <p className="text-center text-2xl mb-10">
+            A public goods funding platform on Base that rewards funders with Mycologuys NFTs
+          </p>
+        </div>
+
+        <div className="mb-10">
+          <h3 className="text-3xl mb-5 font-bold">Personal Campaigns</h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {isLoadingEvents || !events ? (
+              <SkeletonLoader numberOfItems={3} />
+            ) : (
+              events.map((event: any, idx: number) => (
+                <CampaignCard key={idx} contractAddress={event.args.projectAddress} />
+              ))
+            )}
+          </div>
+        </div>
+
+        <div className="mb-10">
+          <h3 className="text-3xl mb-5 font-bold">Recent Funders</h3>
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            {isLoading || !nfts ? (
+              <SkeletonLoader numberOfItems={4} />
+            ) : (
+              <>
+                {nfts.map((nft: any) => (
+                  <Image
+                    key={nft.tokenId}
+                    width={1000}
+                    height={1000}
+                    src={nft.image.originalUrl}
+                    alt={nft.name}
+                    className="rounded-xl"
+                  />
+                ))}
+              </>
+            )}
+          </div>
         </div>
       </div>
     </>
