@@ -11,7 +11,10 @@ contract PublicGoodsFunding is Ownable {
 	mapping(address => bool) projects;
 
 	//Events
-	event ProjectCreated(address projectAddress, address projectOwner);
+	event ProjectCreated(
+		address indexed projectAddress,
+		address indexed projectOwner
+	);
 	event NFTMinted(address projectAddress, address contributor);
 
 	// Functions
