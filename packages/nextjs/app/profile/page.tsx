@@ -3,7 +3,7 @@
 import Image from "next/image";
 import type { NextPage } from "next";
 import { useAccount } from "wagmi";
-import { CampaignCard, SkeletonLoader } from "~~/components/fundguys/";
+import { ProfileCard, SkeletonLoader } from "~~/components/fundguys/";
 import { useFetchNFTs } from "~~/hooks/fundguys/useFetchNFTs";
 import { useDeployedContractInfo, useScaffoldEventHistory } from "~~/hooks/scaffold-eth/";
 
@@ -20,12 +20,12 @@ const Profile: NextPage = () => {
   const { data: events, isLoading: isLoadingEvents } = useScaffoldEventHistory({
     contractName: "PublicGoodsFunding",
     eventName: "ProjectCreated",
-    fromBlock: 31231n,
-    filters: { projectOwner: connectedAddress },
-    watch: true,
-    blockData: true,
-    transactionData: true,
-    receiptData: true,
+    fromBlock: 0n, // 43030910n,
+    filters: {
+      projectOwner: connectedAddress,
+    },
+    watch:true,
+    enabled: true,
   });
 
   console.log("events", events);
@@ -40,7 +40,7 @@ const Profile: NextPage = () => {
           </h1>
 
           <p className="text-center text-2xl mb-10">
-            A public goods funding platform on Base that rewards funders with Mycologuys NFTs
+            A public goods funding platform on Base for the Fund Guys community.
           </p>
         </div>
 
@@ -51,7 +51,7 @@ const Profile: NextPage = () => {
               <SkeletonLoader numberOfItems={3} />
             ) : (
               events.map((event: any, idx: number) => (
-                <CampaignCard key={idx} contractAddress={event.args.projectAddress} />
+                <ProfileCard key={idx} contractAddress={event.args.projectAddress} />
               ))
             )}
           </div>

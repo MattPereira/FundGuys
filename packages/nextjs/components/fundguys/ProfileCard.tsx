@@ -1,10 +1,8 @@
 "use client";
 
-import { useState } from "react";
 import { Address } from "viem";
 import { formatUnits } from "viem";
-import { useContractRead } from "wagmi";
-import { useScaffoldContractWrite } from "~~/hooks/scaffold-eth";
+import { useContractRead, useContractWrite } from "wagmi";
 import ProjectABI from "~~/app/campaigns/ProjectABI.json";
 
 interface Props {
@@ -17,12 +15,13 @@ export const ProfileCard = ({ contractAddress }: Props) => {
     address: contractAddress,
     abi: ProjectABI,
     functionName: "getProject",
-  });
+  }); // might not need this
 
-  const { writeAsync } = useScaffoldContractWrite({
-    contractName: "Project",
+  const {write} = useContractWrite({
+    address: contractAddress ?? "",
+    abi: ProjectABI,
     functionName: "withdrawFunds",
-  });
+  })
 
   const [title, description, image, projectTokenAddress, targetAmount, amountRaised, deadline, completed] =
     projectData as any;
@@ -45,6 +44,9 @@ export const ProfileCard = ({ contractAddress }: Props) => {
         </div>
         <p>{deadline}</p>
         <p>{completed}</p>
+        <button onClick={() => write({})} className="donate">
+          Withdraw
+        </button>
       </div>
     </div>
   );
