@@ -88,7 +88,7 @@ export const CampaignCard = ({ contractAddress, isProfilePage }: ICampaignCard) 
         </div>
 
         <div className="grid grid-cols-2 gap-5">
-          <button className="btn btn-accent rounded-lg w-full font-cubano font-normal text-xl">Share</button>
+          <button onClick={handleShare} className="btn btn-accent rounded-lg w-full font-cubano font-normal text-xl">Share</button>
           {isProfilePage ? (
             <button
               onClick={() => write({})}
