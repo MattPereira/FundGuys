@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { DonateModal } from "./DonateModal";
+// import { DonateModal } from "./DonateModal";
 import { Address } from "viem";
 import { formatUnits } from "viem";
 import { useContractRead } from "wagmi";
@@ -13,6 +13,7 @@ interface Props {
 
 export const CampaignCard = ({ contractAddress }: Props) => {
   const [donateModalOpen, setDonateModalOpen] = useState(false);
+  console.log("contractAddress", contractAddress);
 
   const { data: projectData = {}, isLoading } = useContractRead({
     address: contractAddress,
@@ -20,10 +21,12 @@ export const CampaignCard = ({ contractAddress }: Props) => {
     functionName: "getProject",
   });
 
+  if (isLoading) return <div className="skeleton animate-pulse bg-base-100 rounded-xl w-full h-72"></div>;
+
   const [title, description, image, projectTokenAddress, targetAmount, amountRaised, deadline, completed] =
     projectData as any;
 
-  if (isLoading) return <div className="skeleton animate-pulse bg-base-100 rounded-xl w-full h-72"></div>;
+  console.log("projectData", projectData);
 
   const percentageBigInt = (amountRaised * BigInt(100)) / (targetAmount || 1n);
   const percentage = Number(percentageBigInt);
@@ -45,11 +48,11 @@ export const CampaignCard = ({ contractAddress }: Props) => {
           Donate
         </button>
       </div>
-      <DonateModal
+      {/* <DonateModal
         projectTokenAddress={projectTokenAddress}
         open={donateModalOpen}
         setClosed={() => setDonateModalOpen(false)}
-      />
+      /> */}
     </div>
   );
 };
