@@ -43,7 +43,7 @@ const deployYourContract: DeployFunction = async function (hre: HardhatRuntimeEn
     title: "BuidlGuild",
     description:
       "A curated group of Ethereum builders creating products, prototypes, and tutorials to enrich the web3 ecosystem",
-    wethContractAddress: "0xfFf9976782d46CC05630D1f6eBAb18b2324d6B14".toLowerCase(), // wETH on Sepolia
+    uniContractAddress: "0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984".toLowerCase(), // UNI on Sepolia
     targetAmount: hre.ethers.parseEther("0.69"),
     deadline: Math.floor(new Date("2024-06-09").getTime() / 1000),
     image: "https://buidlguidl.com/assets/hero.png",
@@ -61,7 +61,7 @@ const deployYourContract: DeployFunction = async function (hre: HardhatRuntimeEn
   await publicGoodsFunding.createProject(
     buidlGuidl.title,
     buidlGuidl.description,
-    buidlGuidl.wethContractAddress,
+    buidlGuidl.uniContractAddress,
     buidlGuidl.targetAmount,
     buidlGuidl.deadline,
     buidlGuidl.image,

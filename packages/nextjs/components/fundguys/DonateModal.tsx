@@ -46,25 +46,31 @@ export const DonateModal = ({ projectTokenAddress, projectAddress }) => {
     args: [projectAddress, parsedAmount],
   });
 
+  const args = [parsedAmount, tokenToDonate, projectTokenAddress, quote?.allowanceTarget, quote?.to, quote?.data];
   const { write: sendTokenDonation } = useContractWrite({
-    address: tokenToDonate,
+    address: projectAddress,
     abi: ProjectABI,
     functionName: "donateToken",
-    args: [parsedAmount, tokenToDonate, projectTokenAddress, quote?.allowanceTarget, quote?.to, quote?.data],
+    args,
   });
 
   useEffect(() => {
     const getQuote = async () => {
-      const res = await fetch(`/api/swap?buyToken=${projectTokenAddress}&sellToken=${tokenToDonate}`);
+      const res = await fetch(
+        `/api/swap?buyToken=${projectTokenAddress}&sellToken=${tokenToDonate}&sellAmount=${parsedAmount}`,
+      );
       const quoteData = await res.json();
       setQuote(quoteData);
     };
     if (tokenToDonate) getQuote();
-  }, [tokenToDonate, projectTokenAddress]);
+  }, [tokenToDonate, projectTokenAddress, parsedAmount]);
 
   const needsApproval = (allowance || 0n) < parsedAmount;
   const submitText = needsApproval ? "Approve" : "Send";
   const handleSubmit = () => {
+    console.log({
+      args,
+    });
     needsApproval ? approve?.() : sendTokenDonation?.();
   };
 

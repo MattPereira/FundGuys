@@ -11,7 +11,8 @@ export async function GET(request: NextRequest) {
   try {
     const searchParams = request.nextUrl.searchParams;
 
-    const response = await fetch(`https://sepolia.api.0x.org/swap/v1/quote?${searchParams}`, {
+    const url = `https://sepolia.api.0x.org/swap/v1/quote?${searchParams}`;
+    const response = await fetch(url, {
       headers: {
         "0x-api-key": process.env.NEXT_PUBLIC_0X_API_KEY ?? "c9f13c84-9fcb-4f42-aa30-a11b0d016aa5", //"c9f13c84-9fcb-4f42-aa30-a11b0d016aa5"
       },

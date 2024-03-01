@@ -48,6 +48,7 @@ contract PublicGoodsFunding is Ownable {
 			deadline,
 			image
 		);
+		projects[address(project)] = true;
 		emit ProjectCreated(address(project), msg.sender);
 	}
 
