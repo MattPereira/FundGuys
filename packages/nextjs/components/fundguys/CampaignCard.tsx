@@ -1,7 +1,6 @@
 "use client";
 
-import { useState } from "react";
-// import { DonateModal } from "./DonateModal";
+import { DonateModal } from "./DonateModal";
 import { Address, formatUnits, parseAbi } from "viem";
 import { useContractRead } from "wagmi";
 import ProjectABI from "~~/app/campaigns/ProjectABI.json";
@@ -11,9 +10,9 @@ interface Props {
 }
 
 export const CampaignCard = ({ contractAddress }: Props) => {
-  const [donateModalOpen, setDonateModalOpen] = useState(false);
+  const openModal = () => document.getElementById("donate_modal").showModal();
 
-  const { data: projectData = {}, isLoading } = useContractRead({
+  const { data: projectData = [], isLoading } = useContractRead({
     address: contractAddress,
     abi: ProjectABI,
     functionName: "getProject",
@@ -21,9 +20,10 @@ export const CampaignCard = ({ contractAddress }: Props) => {
 
   if (isLoading) return <div className="skeleton animate-pulse bg-base-100 rounded-xl w-full h-72"></div>;
 
+  console.log({ projectData });
   const [title, description, image, projectTokenAddress, targetAmount, amountRaised, deadline] = projectData as any;
 
-  const percentageBigInt = (amountRaised * BigInt(100)) / (targetAmount || 1n);
+  const percentageBigInt = (amountRaised || 0n * BigInt(100)) / (targetAmount || 1n);
   const percentage = Number(percentageBigInt);
 
   const deadlineDate = new Date(Number(deadline) * 1000);
@@ -44,7 +44,7 @@ export const CampaignCard = ({ contractAddress }: Props) => {
           <div className="flex justify-between">
             <div>{daysRemaining} days left</div>
             <div className="flex gap-2">
-              {Number(formatUnits(amountRaised, 18)).toFixed(2)} / {formatUnits(targetAmount, 18)}{" "}
+              {Number(formatUnits(amountRaised || "", 18)).toFixed(2)} / {formatUnits(targetAmount || "", 18)}{" "}
               <TokenSymbol tokenAddress={projectTokenAddress} />
             </div>
           </div>
@@ -54,18 +54,13 @@ export const CampaignCard = ({ contractAddress }: Props) => {
           <button className="btn btn-accent rounded-lg w-full font-cubano font-normal text-xl">Share</button>
           <button
             className="text-accent btn btn-primary rounded-lg w-full font-cubano font-normal text-xl"
-            onClick={() => setDonateModalOpen(true)}
+            onClick={openModal}
           >
             Donate
           </button>
         </div>
       </div>
-      {/* <DonateModal
-      {/* <DonateModal
-        projectTokenAddress={projectTokenAddress}
-        open={donateModalOpen}
-        setClosed={() => setDonateModalOpen(false)}
-      /> */}
+      <DonateModal projectTokenAddress={projectTokenAddress} projectAddress={contractAddress} />
     </div>
   );
 };
