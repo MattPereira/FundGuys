@@ -2,10 +2,10 @@
 
 import Link from "next/link";
 import { DonateModal } from "./DonateModal";
-import { Address, formatUnits } from "viem";
-import { useAccount, useContractRead, useContractWrite } from "wagmi";
+import { Address, formatUnits, parseAbi } from "viem";
+import { useContractRead, useContractWrite, useAccount } from "wagmi";
+import { useScaffoldEventHistory } from "~~/hooks/scaffold-eth";
 import ProjectABI from "~~/app/campaigns/ProjectABI.json";
-import { TokenSymbol } from "~~/components/fundguys/TokenSymbol";
 
 interface ICampaignCard {
   contractAddress: undefined | Address;
@@ -28,16 +28,6 @@ export const CampaignCard = ({ contractAddress, isProfilePage }: ICampaignCard) 
     functionName: "withdrawFunds",
   });
 
-  // const { data: events, isLoading: isLoadingEvents } = useScaffoldEventHistory({
-  //   contractName: "PublicGoodsFunding",
-  //   eventName: "ProjectCreated",
-  //   fromBlock: 0n, // 43030910n,
-  // filters: {
-  //   projectOwner: connectedAddress,
-  // },
-  //   transactionData: true,
-  //   receiptData: true,
-  // });
 
   if (isLoading) return <div className="skeleton animate-pulse bg-base-100 rounded-xl w-full h-72"></div>;
 
@@ -52,21 +42,6 @@ export const CampaignCard = ({ contractAddress, isProfilePage }: ICampaignCard) 
   const timeRemaining = deadlineDate.getTime() - currentDate.getTime();
   const daysRemaining = Math.ceil(timeRemaining / (1000 * 60 * 60 * 24));
 
-  const handleShare = () => {
-    // if (events && events.length > 0) {
-    // const projectOwnerAddress = events[0].args.projectOwner;
-    // const truncatedOwner = `${projectOwnerAddress?.slice(0, 2)}...${projectOwnerAddress?.slice(-4)}`;
-    // const text = `Owner (${truncatedOwner}) would like your help with their campaign: ${title}. Take a moment to hear their story.`;
-    const text = `Take a moment to hear about the stories from the Fund Guys Community 🍄`;
-    const url = "https://fund-guys.vercel.app/campaigns"; // Replace with your campaign link
-    const warpcastUrl = `https://warpcast.com/~/compose?text=${encodeURIComponent(text)}&embeds[]=${encodeURIComponent(
-      url,
-    )}`;
-
-    window.open(warpcastUrl, "_blank");
-    // } else {
-    //   console.log("No events found")
-    // }
   };
 
   return (
@@ -96,7 +71,10 @@ export const CampaignCard = ({ contractAddress, isProfilePage }: ICampaignCard) 
             Details
           </Link>
           {isProfilePage ? (
-            <button onClick={() => write({})} className="btn btn-primary  w-full font-cubano font-normal text-xl">
+            <button
+              onClick={() => write({})}
+              className="btn btn-primary rounded-lg w-full font-cubano font-normal text-xl"
+            >
               Withdraw
             </button>
           ) : (
@@ -109,4 +87,15 @@ export const CampaignCard = ({ contractAddress, isProfilePage }: ICampaignCard) 
       <DonateModal projectTokenAddress={projectTokenAddress} projectAddress={contractAddress} />
     </div>
   );
+};
+
+const TokenSymbol = ({ tokenAddress }: { tokenAddress: any }) => {
+  const { data: symbol, isLoading } = useContractRead({
+    address: tokenAddress,
+    abi: parseAbi(["function symbol() view returns (string)"]),
+    functionName: "symbol",
+  });
+
+  if (isLoading) return "...";
+  return <div>{symbol}</div>;
 };
