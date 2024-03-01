@@ -73,13 +73,18 @@ contract Project {
 			uint256 startingBalance = buyToken.balanceOf(address(this));
 
 			sellToken.transferFrom(msg.sender, address(this), amount);
-			require(sellToken.approve(spender, type(uint256).max), "Failed to approve");
 
-			(bool success,) = swapTarget.call{value: msg.value}(swapCallData);
-			require(success, 'SWAP_CALL_FAILED');
+			if (address(sellToken) == projectTokenAddress) {
+				_handleDonation(msg.sender, amount);
+			} else {
+				require(sellToken.approve(spender, type(uint256).max), "Failed to approve");
 
-			uint256 endingBalance = buyToken.balanceOf(address(this));
-			_handleDonation(msg.sender, (endingBalance - startingBalance));
+				(bool success,) = swapTarget.call{value: msg.value}(swapCallData);
+				require(success, 'SWAP_CALL_FAILED');
+
+				uint256 endingBalance = buyToken.balanceOf(address(this));
+				_handleDonation(msg.sender, (endingBalance - startingBalance));
+			}
 	}
 
 	function _handleDonation(address contributor, uint256 amount) private {
