@@ -5,3 +5,4 @@ export * from "./Swap";
 export * from "./CreateCampaign";
 export * from "./TextField";
 export * from "./CampaignCard";
+export * from "./ProfileCard";

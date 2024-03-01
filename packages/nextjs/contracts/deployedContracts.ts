@@ -7,7 +7,7 @@ import { GenericContractsDeclaration } from "~~/utils/scaffold-eth/contract";
 const deployedContracts = {
   31337: {
     Mycologuys: {
-      address: "0xc6e7DF5E7b4f2A278906862b61205850344D4e7d",
+      address: "0x5FbDB2315678afecb367f032d93F642f64180aa3",
       abi: [
         {
           inputs: [],
@@ -475,7 +475,7 @@ const deployedContracts = {
       },
     },
     PublicGoodsFunding: {
-      address: "0x59b670e9fA9D0A427751Af201D676719a970857b",
+      address: "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
       abi: [
         {
           inputs: [
@@ -1285,7 +1285,7 @@ const deployedContracts = {
   },
   11155111: {
     Mycologuys: {
-      address: "0x13D4811F2b82EC557aaa80B8B427a5b969EfE70A",
+      address: "0x88cdc621911B00dA11997bA67152D7fC8e742B4e",
       abi: [
         {
           inputs: [],
@@ -1753,7 +1753,7 @@ const deployedContracts = {
       },
     },
     PublicGoodsFunding: {
-      address: "0x0f70ae600cF47840e1A49d8827A178FADaFb0a80",
+      address: "0xd7BEea4eEb428540585653f3d04ca97FD2D33445",
       abi: [
         {
           inputs: [
