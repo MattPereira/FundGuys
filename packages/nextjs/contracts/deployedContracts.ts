@@ -6,13 +6,18 @@ import { GenericContractsDeclaration } from "~~/utils/scaffold-eth/contract";
 
 const deployedContracts = {
   31337: {
-    Mycologuys: {
-      address: "0x0DCd1Bf9A1b36cE34237eEaFef220932846BCD82",
+    MycoloGuys: {
+      address: "0x0165878A594ca255338adfa4d48449f69242Eb8F",
       abi: [
         {
           inputs: [],
           stateMutability: "nonpayable",
           type: "constructor",
+        },
+        {
+          inputs: [],
+          name: "MycoloGuys__TokenUriNotFound",
+          type: "error",
         },
         {
           anonymous: false,
@@ -62,25 +67,6 @@ const deployedContracts = {
             },
           ],
           name: "ApprovalForAll",
-          type: "event",
-        },
-        {
-          anonymous: false,
-          inputs: [
-            {
-              indexed: true,
-              internalType: "address",
-              name: "previousOwner",
-              type: "address",
-            },
-            {
-              indexed: true,
-              internalType: "address",
-              name: "newOwner",
-              type: "address",
-            },
-          ],
-          name: "OwnershipTransferred",
           type: "event",
         },
         {
@@ -178,6 +164,19 @@ const deployedContracts = {
           type: "function",
         },
         {
+          inputs: [],
+          name: "getTokenCounter",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
           inputs: [
             {
               internalType: "address",
@@ -222,19 +221,6 @@ const deployedContracts = {
           type: "function",
         },
         {
-          inputs: [],
-          name: "owner",
-          outputs: [
-            {
-              internalType: "address",
-              name: "",
-              type: "address",
-            },
-          ],
-          stateMutability: "view",
-          type: "function",
-        },
-        {
           inputs: [
             {
               internalType: "uint256",
@@ -255,19 +241,31 @@ const deployedContracts = {
         },
         {
           inputs: [],
-          name: "renounceOwnership",
-          outputs: [],
-          stateMutability: "nonpayable",
-          type: "function",
-        },
-        {
-          inputs: [],
           name: "s_tokenCounter",
           outputs: [
             {
               internalType: "uint256",
               name: "",
               type: "uint256",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "tokenId",
+              type: "uint256",
+            },
+          ],
+          name: "s_tokenIdToUri",
+          outputs: [
+            {
+              internalType: "string",
+              name: "tokenUri",
+              type: "string",
             },
           ],
           stateMutability: "view",
@@ -338,19 +336,6 @@ const deployedContracts = {
             },
           ],
           name: "setApprovalForAll",
-          outputs: [],
-          stateMutability: "nonpayable",
-          type: "function",
-        },
-        {
-          inputs: [
-            {
-              internalType: "string",
-              name: "_baseUri",
-              type: "string",
-            },
-          ],
-          name: "setBaseUri",
           outputs: [],
           stateMutability: "nonpayable",
           type: "function",
@@ -430,19 +415,6 @@ const deployedContracts = {
           type: "function",
         },
         {
-          inputs: [
-            {
-              internalType: "address",
-              name: "newOwner",
-              type: "address",
-            },
-          ],
-          name: "transferOwnership",
-          outputs: [],
-          stateMutability: "nonpayable",
-          type: "function",
-        },
-        {
           inputs: [],
           name: "uriSuffix",
           outputs: [
@@ -469,25 +441,180 @@ const deployedContracts = {
         symbol: "@openzeppelin/contracts/token/ERC721/ERC721.sol",
         tokenURI: "@openzeppelin/contracts/token/ERC721/ERC721.sol",
         transferFrom: "@openzeppelin/contracts/token/ERC721/ERC721.sol",
-        owner: "@openzeppelin/contracts/access/Ownable.sol",
-        renounceOwnership: "@openzeppelin/contracts/access/Ownable.sol",
-        transferOwnership: "@openzeppelin/contracts/access/Ownable.sol",
       },
     },
-    PublicGoodsFunding: {
-      address: "0x9A676e781A523b5d0C0e43731313A708CB607508",
+    Project: {
+      address: "0x9A9f2CCfdE556A7E9Ff0848998Aa4a0CFD8863AE",
       abi: [
         {
           inputs: [
             {
-              internalType: "contract Mycologuys",
-              name: "_nftContract",
+              internalType: "address",
+              name: "_publicGoodsFundingAddress",
               type: "address",
+            },
+            {
+              internalType: "address",
+              name: "_projectOwner",
+              type: "address",
+            },
+            {
+              internalType: "address",
+              name: "_projectTokenAddress",
+              type: "address",
+            },
+            {
+              internalType: "string",
+              name: "_projectTitle",
+              type: "string",
+            },
+            {
+              internalType: "string",
+              name: "_projectDescription",
+              type: "string",
+            },
+            {
+              internalType: "uint256",
+              name: "_targetAmount",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "_deadline",
+              type: "uint256",
+            },
+            {
+              internalType: "string",
+              name: "_image",
+              type: "string",
             },
           ],
           stateMutability: "nonpayable",
           type: "constructor",
         },
+        {
+          anonymous: false,
+          inputs: [
+            {
+              indexed: true,
+              internalType: "address",
+              name: "contributor",
+              type: "address",
+            },
+            {
+              indexed: false,
+              internalType: "uint256",
+              name: "amount",
+              type: "uint256",
+            },
+          ],
+          name: "Contribution",
+          type: "event",
+        },
+        {
+          inputs: [],
+          name: "amountRaised",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "amount",
+              type: "uint256",
+            },
+            {
+              internalType: "contract IERC20",
+              name: "sellToken",
+              type: "address",
+            },
+            {
+              internalType: "contract IERC20",
+              name: "buyToken",
+              type: "address",
+            },
+            {
+              internalType: "address",
+              name: "spender",
+              type: "address",
+            },
+            {
+              internalType: "address payable",
+              name: "swapTarget",
+              type: "address",
+            },
+            {
+              internalType: "bytes",
+              name: "swapCallData",
+              type: "bytes",
+            },
+          ],
+          name: "donateToken",
+          outputs: [],
+          stateMutability: "payable",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "getProject",
+          outputs: [
+            {
+              internalType: "string",
+              name: "",
+              type: "string",
+            },
+            {
+              internalType: "string",
+              name: "",
+              type: "string",
+            },
+            {
+              internalType: "string",
+              name: "",
+              type: "string",
+            },
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+            {
+              internalType: "bool",
+              name: "",
+              type: "bool",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          stateMutability: "payable",
+          type: "receive",
+        },
+      ],
+      inheritedFunctions: {},
+    },
+    PublicGoodsFunding: {
+      address: "0x9A676e781A523b5d0C0e43731313A708CB607508",
+      abi: [
         {
           anonymous: false,
           inputs: [
@@ -511,34 +638,9 @@ const deployedContracts = {
           anonymous: false,
           inputs: [
             {
-              indexed: true,
-              internalType: "address",
-              name: "previousOwner",
-              type: "address",
-            },
-            {
-              indexed: true,
-              internalType: "address",
-              name: "newOwner",
-              type: "address",
-            },
-          ],
-          name: "OwnershipTransferred",
-          type: "event",
-        },
-        {
-          anonymous: false,
-          inputs: [
-            {
               indexed: false,
               internalType: "address",
               name: "projectAddress",
-              type: "address",
-            },
-            {
-              indexed: false,
-              internalType: "address",
-              name: "projectOwner",
               type: "address",
             },
           ],
@@ -585,68 +687,18 @@ const deployedContracts = {
         },
         {
           inputs: [],
-          name: "mintToFunder",
-          outputs: [],
-          stateMutability: "nonpayable",
-          type: "function",
-        },
-        {
-          inputs: [],
-          name: "owner",
-          outputs: [
-            {
-              internalType: "address",
-              name: "",
-              type: "address",
-            },
-          ],
-          stateMutability: "view",
-          type: "function",
-        },
-        {
-          inputs: [],
-          name: "renounceOwnership",
-          outputs: [],
-          stateMutability: "nonpayable",
-          type: "function",
-        },
-        {
-          inputs: [
-            {
-              internalType: "string",
-              name: "_baseUri",
-              type: "string",
-            },
-          ],
-          name: "setNewBaseUri",
-          outputs: [],
-          stateMutability: "nonpayable",
-          type: "function",
-        },
-        {
-          inputs: [
-            {
-              internalType: "address",
-              name: "newOwner",
-              type: "address",
-            },
-          ],
-          name: "transferOwnership",
+          name: "mintNFT",
           outputs: [],
           stateMutability: "nonpayable",
           type: "function",
         },
       ],
-      inheritedFunctions: {
-        owner: "@openzeppelin/contracts/access/Ownable.sol",
-        renounceOwnership: "@openzeppelin/contracts/access/Ownable.sol",
-        transferOwnership: "@openzeppelin/contracts/access/Ownable.sol",
-      },
+      inheritedFunctions: {},
     },
   },
   80001: {
     Mycologuys: {
-      address: "0x90B2C930d17e2672a1Fae255e3A55D636Ae6f47c",
+      address: "0x83f3047D35a18E063B1Fe635aA47C2003057A064",
       abi: [
         {
           inputs: [],
@@ -1114,7 +1166,7 @@ const deployedContracts = {
       },
     },
     PublicGoodsFunding: {
-      address: "0x9BC2b08C39255d5a465c4d39f1863230E60D572d",
+      address: "0x259Ed970f6Df7aF7BC46dEb17bC57b26790bfef1",
       abi: [
         {
           inputs: [
@@ -1169,13 +1221,13 @@ const deployedContracts = {
           anonymous: false,
           inputs: [
             {
-              indexed: false,
+              indexed: true,
               internalType: "address",
               name: "projectAddress",
               type: "address",
             },
             {
-              indexed: false,
+              indexed: true,
               internalType: "address",
               name: "projectOwner",
               type: "address",
@@ -1285,7 +1337,7 @@ const deployedContracts = {
   },
   11155111: {
     Mycologuys: {
-      address: "0x629354294988DA87aa2572388f14cf5eC9eCBAe7",
+      address: "0xcF89712E8c31Cc50e36BDDEfcff70e9f571C84db",
       abi: [
         {
           inputs: [],
@@ -1753,7 +1805,7 @@ const deployedContracts = {
       },
     },
     PublicGoodsFunding: {
-      address: "0x49595B1c51C097E7f26daB6142165BD78D208f3F",
+      address: "0x6D0a9C01DA9B2DE91a2C9e4a471B478331426726",
       abi: [
         {
           inputs: [
@@ -1808,13 +1860,13 @@ const deployedContracts = {
           anonymous: false,
           inputs: [
             {
-              indexed: false,
+              indexed: true,
               internalType: "address",
               name: "projectAddress",
               type: "address",
             },
             {
-              indexed: false,
+              indexed: true,
               internalType: "address",
               name: "projectOwner",
               type: "address",
