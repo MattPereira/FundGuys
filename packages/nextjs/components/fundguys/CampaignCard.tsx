@@ -1,10 +1,11 @@
 "use client";
 
+import Link from "next/link";
 import { DonateModal } from "./DonateModal";
-import { Address, formatUnits, parseAbi } from "viem";
-import { useContractRead, useContractWrite, useAccount } from "wagmi";
-import { useScaffoldEventHistory } from "~~/hooks/scaffold-eth";
+import { Address, formatUnits } from "viem";
+import { useAccount, useContractRead, useContractWrite } from "wagmi";
 import ProjectABI from "~~/app/campaigns/ProjectABI.json";
+import { TokenSymbol } from "~~/components/fundguys/TokenSymbol";
 
 interface ICampaignCard {
   contractAddress: undefined | Address;
@@ -31,9 +32,9 @@ export const CampaignCard = ({ contractAddress, isProfilePage }: ICampaignCard) 
   //   contractName: "PublicGoodsFunding",
   //   eventName: "ProjectCreated",
   //   fromBlock: 0n, // 43030910n,
-    // filters: {
-    //   projectOwner: connectedAddress,
-    // },
+  // filters: {
+  //   projectOwner: connectedAddress,
+  // },
   //   transactionData: true,
   //   receiptData: true,
   // });
@@ -56,7 +57,7 @@ export const CampaignCard = ({ contractAddress, isProfilePage }: ICampaignCard) 
     // const projectOwnerAddress = events[0].args.projectOwner;
     // const truncatedOwner = `${projectOwnerAddress?.slice(0, 2)}...${projectOwnerAddress?.slice(-4)}`;
     // const text = `Owner (${truncatedOwner}) would like your help with their campaign: ${title}. Take a moment to hear their story.`;
-    const text = `Take a moment to hear about the stories from the Fund Guys Community 🍄`
+    const text = `Take a moment to hear about the stories from the Fund Guys Community 🍄`;
     const url = "https://fund-guys.vercel.app/campaigns"; // Replace with your campaign link
     const warpcastUrl = `https://warpcast.com/~/compose?text=${encodeURIComponent(text)}&embeds[]=${encodeURIComponent(
       url,
@@ -69,7 +70,10 @@ export const CampaignCard = ({ contractAddress, isProfilePage }: ICampaignCard) 
   };
 
   return (
-    <div className="bg-base-200 rounded-xl">
+    <Link
+      href={`/campaigns/${contractAddress}`}
+      className="bg-base-200 rounded-xl cursor-pointer transition-transform transform hover:scale-105 hover:shadow-lg hover:shadow-base-200"
+    >
       <div className="flex justify-center">
         <img src={image} alt={title} className="w-full h-60 overflow-hidden object-cover rounded-lg" />
       </div>
@@ -88,7 +92,9 @@ export const CampaignCard = ({ contractAddress, isProfilePage }: ICampaignCard) 
         </div>
 
         <div className="grid grid-cols-2 gap-5">
-          <button onClick={handleShare} className="btn btn-accent rounded-lg w-full font-cubano font-normal text-xl">Share</button>
+          <button onClick={handleShare} className="btn btn-accent rounded-lg w-full font-cubano font-normal text-xl">
+            Share
+          </button>
           {isProfilePage ? (
             <button
               onClick={() => write({})}
@@ -104,17 +110,6 @@ export const CampaignCard = ({ contractAddress, isProfilePage }: ICampaignCard) 
         </div>
       </div>
       <DonateModal projectTokenAddress={projectTokenAddress} projectAddress={contractAddress} />
-    </div>
+    </Link>
   );
-};
-
-const TokenSymbol = ({ tokenAddress }: { tokenAddress: any }) => {
-  const { data: symbol, isLoading } = useContractRead({
-    address: tokenAddress,
-    abi: parseAbi(["function symbol() view returns (string)"]),
-    functionName: "symbol",
-  });
-
-  if (isLoading) return "...";
-  return <div>{symbol}</div>;
 };

@@ -45,9 +45,11 @@ const Home: NextPage = () => {
             {isLoadingEvents || !events ? (
               <SkeletonLoader numberOfItems={3} />
             ) : (
-              events.map((event: any, idx: number) => (
-                <CampaignCard key={idx} contractAddress={event.args.projectAddress} isProfilePage={false} />
-              ))
+              events
+                .slice(0, 3)
+                .map((event: any, idx: number) => (
+                  <CampaignCard key={idx} contractAddress={event.args.projectAddress} isProfilePage={false} />
+                ))
             )}
           </div>
         </div>
@@ -59,7 +61,7 @@ const Home: NextPage = () => {
               <SkeletonLoader numberOfItems={4} />
             ) : (
               <>
-                {nfts.map((nft: any) => (
+                {nfts.slice(0, 4).map((nft: any) => (
                   <Image
                     key={nft.tokenId}
                     width={1000}
