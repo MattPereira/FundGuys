@@ -1,9 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import type { NextPage } from "next";
-import { CampaignCard, CreateCampaign, SkeletonLoader } from "~~/components/fundguys/";
+import { CampaignCard, SkeletonLoader } from "~~/components/fundguys/";
 import { useFetchNFTs } from "~~/hooks/fundguys/useFetchNFTs";
 import { useDeployedContractInfo, useScaffoldEventHistory } from "~~/hooks/scaffold-eth/";
 
