@@ -19,7 +19,7 @@ const Funders: NextPage = () => {
   return (
     <>
       <div className="px-5 sm:px-7 md:px-20 my-10">
-        <h3 className="text-6xl text-center font-bold">Funders</h3>
+        <h3 className="text-7xl text-center font-madimi">Funders</h3>
 
         <p className="text-center text-2xl mt-10 mb-14">
           Check out all the funders who have contributed to public goods campaigns on FundGuys

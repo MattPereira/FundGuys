@@ -92,18 +92,15 @@ export const CampaignCard = ({ contractAddress, isProfilePage }: ICampaignCard) 
         </div>
 
         <div className="grid grid-cols-2 gap-5">
-          <button onClick={handleShare} className="btn btn-accent rounded-lg w-full font-cubano font-normal text-xl">
+          <button onClick={handleShare} className="btn btn-accent w-full font-cubano font-normal text-xl">
             Share
           </button>
           {isProfilePage ? (
-            <button
-              onClick={() => write({})}
-              className="btn btn-primary rounded-lg w-full font-cubano font-normal text-xl"
-            >
+            <button onClick={() => write({})} className="btn btn-primary  w-full font-cubano font-normal text-xl">
               Withdraw
             </button>
           ) : (
-            <button className="btn btn-primary rounded-lg w-full font-cubano font-normal text-xl" onClick={openModal}>
+            <button className="btn btn-primary  w-full font-cubano font-normal text-xl" onClick={openModal}>
               Donate
             </button>
           )}

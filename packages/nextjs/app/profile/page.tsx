@@ -1,14 +1,17 @@
 "use client";
 
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 import type { NextPage } from "next";
 import { useAccount } from "wagmi";
-import { UserIcon } from "@heroicons/react/24/outline";
 import { SkeletonLoader } from "~~/components/fundguys/";
 import { CampaignCard } from "~~/components/fundguys/";
+import { CreateCampaign } from "~~/components/fundguys/CreateCampaign";
 import { useScaffoldEventHistory } from "~~/hooks/scaffold-eth/";
 
 const Profile: NextPage = () => {
   const { address: connectedAddress } = useAccount();
+  const router = useRouter();
 
   const { data: events, isLoading: isLoadingEvents } = useScaffoldEventHistory({
     contractName: "PublicGoodsFunding",
@@ -17,10 +20,16 @@ const Profile: NextPage = () => {
     filters: {
       projectOwner: connectedAddress,
     },
-    transactionData:true,
-    receiptData:true,
+    transactionData: true,
+    receiptData: true,
     enabled: true,
   });
+
+  useEffect(() => {
+    if (!connectedAddress) {
+      router.push("/");
+    }
+  }, [connectedAddress, router]);
 
   console.log("events", events);
 
@@ -29,11 +38,12 @@ const Profile: NextPage = () => {
       <div className="px-5 sm:px-7 md:px-20 my-10">
         <div>
           <div className="flex justify-center items-center">
-            <UserIcon className="h-14 w-14 mr-1" />
-            <h3 className="text-6xl text-center font-bold">Profile</h3>
+            <h3 className="text-7xl text-center font-madimi">Your Profile</h3>
           </div>
 
-          <p className="text-center text-2xl mt-10 mb-14">Manage your existing campaigns and create new ones</p>
+          <div className="text-center text-2xl mt-10 mb-14">
+            Manage all of your existing campaigns or <CreateCampaign />
+          </div>
         </div>
 
         <div className="mb-10">

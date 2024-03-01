@@ -27,11 +27,11 @@ export const menuLinks: HeaderMenuLink[] = [
     href: "/funders",
     icon: <BanknotesIcon className="h-5 w-5" />,
   },
-  {
-    label: "Debug Contracts",
-    href: "/debug",
-    icon: <BugAntIcon className="h-5 w-5" />,
-  },
+  // {
+  //   label: "Debug Contracts",
+  //   href: "/debug",
+  //   icon: <BugAntIcon className="h-5 w-5" />,
+  // },
 ];
 
 export const HeaderMenuLinks = () => {
@@ -113,9 +113,8 @@ export const Header = () => {
           )}
         </div>
         <Link href="/" passHref className="hidden lg:flex items-center gap-2 ml-4 mr-6 shrink-0">
-          <div className="flex relative w-10 h-10 text-3xl">🍄</div>
           <div className="flex flex-col">
-            <span className="font-chewy leading-tight text-3xl">FundGuys</span>
+            <span className="font-madimi leading-tight text-3xl">🍄 FundGuys</span>
             {/* <span className="text-xs">Public Goods Funding</span> */}
           </div>
         </Link>

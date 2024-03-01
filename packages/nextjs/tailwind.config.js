@@ -81,6 +81,7 @@ module.exports = {
         gothic: ["didact gothic", "sans-serif"],
         inter: ["inter", "sans-serif"],
         chewy: ["chewy", "sans-serif"],
+        madimi: ["Madimi One", "sans-serif"],
       },
       boxShadow: {
         center: "0 0 12px -2px rgb(0 0 0 / 0.05)",

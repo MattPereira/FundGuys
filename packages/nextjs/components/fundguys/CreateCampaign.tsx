@@ -23,7 +23,7 @@ export const CreateCampaign = () => {
           }
         }}
       >
-        create your own
+        create a campaign
       </button>
       <CreateCampaignModal />
     </>

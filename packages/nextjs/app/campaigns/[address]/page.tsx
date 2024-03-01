@@ -26,7 +26,7 @@ export default function CampaignDetailsPage({ params }: { params: { address: str
   return (
     <>
       <div className="px-5 sm:px-7 md:px-20 my-10">
-        <h3 className="text-6xl text-center font-bold mb-10">Campaign Details</h3>
+        <h3 className="text-7xl text-center font-madimi mb-10">Campaign Details</h3>
         <div>
           <img src={image} alt={title} className="w-full h-96 overflow-hidden object-cover rounded-lg mb-10" />
         </div>
