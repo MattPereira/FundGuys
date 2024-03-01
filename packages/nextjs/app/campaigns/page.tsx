@@ -27,7 +27,7 @@ const Campaigns: NextPage = () => {
             ))}
           {data &&
             data?.map(({ args: { projectAddress } }) => (
-              <CampaignCard key={projectAddress} contractAddress={projectAddress} />
+              <CampaignCard key={projectAddress} contractAddress={projectAddress} isProfilePage={false} />
             ))}
         </div>
       </div>

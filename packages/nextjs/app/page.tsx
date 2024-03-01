@@ -46,7 +46,7 @@ const Home: NextPage = () => {
               <SkeletonLoader numberOfItems={3} />
             ) : (
               events.map((event: any, idx: number) => (
-                <CampaignCard key={idx} contractAddress={event.args.projectAddress} />
+                <CampaignCard key={idx} contractAddress={event.args.projectAddress} isProfilePage={false} />
               ))
             )}
           </div>

@@ -4,7 +4,7 @@ import React, { useCallback, useRef, useState } from "react";
 // import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-// import { useAccount } from "wagmi";
+import { useAccount } from "wagmi";
 import { BanknotesIcon, Bars3Icon, BugAntIcon, HeartIcon, UserIcon } from "@heroicons/react/24/outline";
 import { SwitchTheme } from "~~/components/SwitchTheme";
 import { FaucetButton, RainbowKitCustomConnectButton } from "~~/components/scaffold-eth";
@@ -28,11 +28,6 @@ export const menuLinks: HeaderMenuLink[] = [
     icon: <BanknotesIcon className="h-5 w-5" />,
   },
   {
-    label: "Profile",
-    href: "/profile",
-    icon: <UserIcon className="h-5 w-5" />,
-  },
-  {
     label: "Debug Contracts",
     href: "/debug",
     icon: <BugAntIcon className="h-5 w-5" />,
@@ -40,7 +35,7 @@ export const menuLinks: HeaderMenuLink[] = [
 ];
 
 export const HeaderMenuLinks = () => {
-  // const { address: connectedAddress } = useAccount();
+  const { address: connectedAddress } = useAccount();
 
   const pathname = usePathname();
 
@@ -63,6 +58,18 @@ export const HeaderMenuLinks = () => {
           </li>
         );
       })}
+      {connectedAddress && (
+        <li key="/profile">
+          <Link
+            href="/profile"
+            passHref
+            className={`text-xl active:!text-neutral py-1.5 px-3 text-sm rounded-full gap-2 grid grid-flow-col`}
+          >
+            <UserIcon className="h-5 w-5" />
+            <span>Profile</span>
+          </Link>
+        </li>
+      )}
     </>
   );
 };

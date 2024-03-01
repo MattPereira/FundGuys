@@ -3,20 +3,27 @@
 import { useState } from "react";
 // import { DonateModal } from "./DonateModal";
 import { Address, formatUnits, parseAbi } from "viem";
-import { useContractRead } from "wagmi";
+import { useContractRead, useContractWrite } from "wagmi";
 import ProjectABI from "~~/app/campaigns/ProjectABI.json";
 
-interface Props {
+interface ICampaignCard {
   contractAddress: undefined | Address;
+  isProfilePage: boolean;
 }
 
-export const CampaignCard = ({ contractAddress }: Props) => {
+export const CampaignCard = ({ contractAddress, isProfilePage }: ICampaignCard) => {
   const [donateModalOpen, setDonateModalOpen] = useState(false);
 
   const { data: projectData = {}, isLoading } = useContractRead({
     address: contractAddress,
     abi: ProjectABI,
     functionName: "getProject",
+  });
+
+  const { write } = useContractWrite({
+    address: contractAddress ?? "",
+    abi: ProjectABI,
+    functionName: "withdrawFunds",
   });
 
   if (isLoading) return <div className="skeleton animate-pulse bg-base-100 rounded-xl w-full h-72"></div>;
@@ -52,12 +59,21 @@ export const CampaignCard = ({ contractAddress }: Props) => {
 
         <div className="grid grid-cols-2 gap-5">
           <button className="btn btn-accent rounded-lg w-full font-cubano font-normal text-xl">Share</button>
-          <button
-            className="text-accent btn btn-primary rounded-lg w-full font-cubano font-normal text-xl"
-            onClick={() => setDonateModalOpen(true)}
-          >
-            Donate
-          </button>
+          {isProfilePage ? (
+            <button
+              onClick={() => write({})}
+              className="btn btn-primary rounded-lg w-full font-cubano font-normal text-xl"
+            >
+              Withdraw
+            </button>
+          ) : (
+            <button
+              className="btn btn-primary rounded-lg w-full font-cubano font-normal text-xl"
+              onClick={() => setDonateModalOpen(true)}
+            >
+              Donate
+            </button>
+          )}
         </div>
       </div>
       {/* <DonateModal
