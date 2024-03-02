@@ -32,45 +32,50 @@ export default function CampaignDetailsPage({ params }: { params: { address: str
     window.open(warpcastUrl, "_blank");
   };
 
+  console.log("projectTokenAddress", projectTokenAddress);
+
   return (
     <>
       <div className="px-5 sm:px-7 md:px-20 my-10">
-        <h3 className="text-7xl text-center font-madimi mb-10">Campaign Details</h3>
+        <div className="flex justify-center">
+          <div className="">
+            <h3 className="text-7xl text-center font-madimi mb-10">Campaign Details</h3>
 
-        <div>
-          <img src={image} alt={title} className="w-full h-96 overflow-hidden object-cover rounded-lg mb-10" />
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
-          <button onClick={handleShare} className="btn btn-primary w-full font-cubano font-normal text-xl">
-            Share
-          </button>
-          <button className="btn-accent btn w-full font-cubano font-normal text-xl">Donate</button>
-        </div>
-        <div className="overflow-x-auto border border-white rounded-lg">
-          <table className="table ">
-            <tbody className="text-xl">
-              <tr>
-                <th className="border-r border-b border-white">Title</th>
-                <td className="border-b">{title}</td>
-              </tr>
-              <tr>
-                <th className="border-r border-b border-white">Description</th>
-                <td className="border-b">{description}</td>
-              </tr>
-              <tr>
-                <th className="border-r border-b border-white">Fundraising</th>
-                <td className="border-b">
-                  {Number(formatUnits(amountRaised || "", 18)).toFixed(2)} / {formatUnits(targetAmount || "", 18)}{" "}
-                  <TokenSymbol tokenAddress={projectTokenAddress} />
-                </td>
-              </tr>
-              <tr>
-                <th className="border-r border-b border-white">Deadline</th>
-                <td className="border-b">{deadlineDate.toDateString()}</td>
-              </tr>
-            </tbody>
-          </table>
-          bu
+            <div>
+              <img src={image} alt={title} className="w-full h-96 overflow-hidden object-cover rounded-lg mb-10" />
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
+              <button onClick={handleShare} className="btn btn-primary w-full font-cubano font-normal text-xl">
+                Share
+              </button>
+              <button className="btn-accent btn w-full font-cubano font-normal text-xl">Donate</button>
+            </div>
+            <div className="overflow-x-auto border border-white rounded-lg">
+              <table className="table ">
+                <tbody className="text-xl">
+                  <tr>
+                    <th className="border-r border-b border-white">Title</th>
+                    <td className="border-b">{title}</td>
+                  </tr>
+                  <tr>
+                    <th className="border-r border-b border-white">Description</th>
+                    <td className="border-b">{description}</td>
+                  </tr>
+                  <tr>
+                    <th className="border-r border-b border-white">Fundraising</th>
+                    <td className="border-b">
+                      {Number(formatUnits(amountRaised || "", 18)).toFixed(2)} / {formatUnits(targetAmount || "", 18)}{" "}
+                      <TokenSymbol tokenAddress={projectTokenAddress} />
+                    </td>
+                  </tr>
+                  <tr>
+                    <th className="border-r border-b border-white">Deadline</th>
+                    <td className="border-b">{deadlineDate.toDateString()}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
       </div>
     </>

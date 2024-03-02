@@ -3,8 +3,14 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { parseEther } from "viem";
-import { TextField } from "~~/components/fundguys/TextField";
+import { Select, TextField } from "~~/components/fundguys/";
 import { useScaffoldContractWrite } from "~~/hooks/scaffold-eth";
+
+const preferredTokenOptions = [
+  { value: "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913", label: "USDC" },
+  { value: "0x50c5725949A6F0c72E6C4a641F24049A917DB0Cb", label: "DAI" },
+  { value: "0x4200000000000000000000000000000000000006", label: "WETH" },
+];
 
 export const CreateCampaign = () => {
   const [isClient, setIsClient] = useState(false);
@@ -48,6 +54,7 @@ const CreateCampaignModal = () => {
 
   const onSubmit = async (data: any) => {
     try {
+      console.log("data", data);
       // convert human-readable date to unix timestamp
       const date = new Date(data.deadline);
       const deadline = BigInt(Math.floor(date.getTime() / 1000));
@@ -56,7 +63,7 @@ const CreateCampaignModal = () => {
         args: [
           data.name,
           data.description,
-          "0xfFf9976782d46CC05630D1f6eBAb18b2324d6B14".toLowerCase(), // HARDCODED wETH MUST CHANGE FOR BASE
+          data.preferredToken, // HARDCODED wETH MUST CHANGE FOR BASE
           parseEther(data.targetAmount),
           deadline,
           data.image,
@@ -126,6 +133,17 @@ const CreateCampaignModal = () => {
               required: "Please provide a campaign end date",
             }}
             errors={errors.birthdate}
+          />
+          <Select
+            id="preferredToken"
+            label="Preferred Token"
+            placeholder="Choose a token"
+            options={preferredTokenOptions}
+            register={register}
+            validations={{
+              required: "Please choose a preferred Token",
+            }}
+            errors={errors.gradeLevel}
           />
 
           <button className="btn btn-lg btn-accent text-2xl font-normal font-cubano w-full mt-5 mb-2">Submit</button>
