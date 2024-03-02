@@ -53,38 +53,50 @@ contract Project {
 		_handleDonation(msg.sender, msg.value);
 	}
 
+	function donateSameToken(IERC20 sameToken) public payable {
+		require(completed == false, "Project is completed");
+		require(msg.value > 0, "Must contribute a positive amount");
+		sameToken.transferFrom(msg.sender, address(this), msg.value);
+		amountRaised += msg.value;
+	}
+
 	function donateToken(
-			uint256 amount,
-			// The `sellTokenAddress` field from the API response.
-			IERC20 sellToken,
-			// The `buyTokenAddress` field from the API response.
-			IERC20 buyToken,
-			// The `allowanceTarget` field from the API response.
-			address spender,
-			// The `to` field from the API response.
-			address payable swapTarget,
-			// The `data` field from the API response.
-			bytes calldata swapCallData
-	)
-			public
-			payable // Must attach ETH equal to the `value` field from the API response.
-	{
-			require(projectTokenAddress != address(0), "Project only accepts contributions in ETH");
-			uint256 startingBalance = buyToken.balanceOf(address(this));
+		uint256 amount,
+		// The `sellTokenAddress` field from the API response.
+		IERC20 sellToken,
+		// The `buyTokenAddress` field from the API response.
+		IERC20 buyToken,
+		// The `allowanceTarget` field from the API response.
+		address spender,
+		// The `to` field from the API response.
+		address payable swapTarget,
+		// The `data` field from the API response.
+		bytes calldata swapCallData // Must attach ETH equal to the `value` field from the API response.
+	) public payable {
+		require(
+			projectTokenAddress != address(0),
+			"Project only accepts contributions in ETH"
+		);
+		uint256 startingBalance = buyToken.balanceOf(address(this));
 
-			sellToken.transferFrom(msg.sender, address(this), amount);
+		sellToken.transferFrom(msg.sender, address(this), amount);
 
-			if (address(sellToken) == projectTokenAddress) {
-				_handleDonation(msg.sender, amount);
-			} else {
-				require(sellToken.approve(spender, type(uint256).max), "Failed to approve");
+		if (address(sellToken) == projectTokenAddress) {
+			_handleDonation(msg.sender, amount);
+		} else {
+			require(
+				sellToken.approve(spender, type(uint256).max),
+				"Failed to approve"
+			);
 
-				(bool success,) = swapTarget.call{value: msg.value}(swapCallData);
-				require(success, 'SWAP_CALL_FAILED');
+			(bool success, ) = swapTarget.call{ value: msg.value }(
+				swapCallData
+			);
+			require(success, "SWAP_CALL_FAILED");
 
-				uint256 endingBalance = buyToken.balanceOf(address(this));
-				_handleDonation(msg.sender, (endingBalance - startingBalance));
-			}
+			uint256 endingBalance = buyToken.balanceOf(address(this));
+			_handleDonation(msg.sender, (endingBalance - startingBalance));
+		}
 	}
 
 	function _handleDonation(address contributor, uint256 amount) private {
@@ -104,13 +116,14 @@ contract Project {
 
 	function withdrawFunds() public onlyOwner {
 		require(
-			amountRaised >= targetAmount ||
-				block.timestamp >= deadline,
+			amountRaised >= targetAmount || block.timestamp >= deadline,
 			"Project funding goals have not been reached"
 		);
 		if (projectTokenAddress == address(0)) {
 			// withdraw ETH
-			(bool success, ) = msg.sender.call{ value: address(this).balance }("");
+			(bool success, ) = msg.sender.call{ value: address(this).balance }(
+				""
+			);
 			require(success, "Failed to withdraw funds");
 		} else {
 			// withdraw tokens

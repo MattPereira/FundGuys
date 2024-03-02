@@ -8,7 +8,7 @@ export async function GET(request: NextRequest) {
 
     // console.log("collectionAddress", collectionAddress);
 
-    const alchemyNftBaseUrl = "https://eth-sepolia.g.alchemy.com/nft/v3/";
+    const alchemyNftBaseUrl = "https://base-mainnet.g.alchemy.com/nft/v3/";
     const alchemyNftEndpoint = "/getNFTsForContract";
 
     const URL = alchemyNftBaseUrl + process.env.ALCHEMY_API_KEY + alchemyNftEndpoint;

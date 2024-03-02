@@ -4,29 +4,30 @@ A Public Goods Funding Platform on Base that rewards funders with Mygologuys NFT
 
 ## Public Goods Funding Platform
 
-- integrate with metamask snaps
-- Ability to donate directly from wallet
-- Ability to donate to a campaign with cc without connecting wallet
-- Integrate with frames on Warpcast?
-- To integrate with Andy’s NFT: (Donation also mints NFT)
-- initial 'Founding Fundguys' dstribution mechanism / airdrop (qr code + tinyurl to a whitelist page on dapp)
+Follow the steps below to get started:
+
+1. Connect Wallet
+2. Create a campaign
+3. Fund your favourite campaign!
+
+Bonus: Click Share to share their story on Warpcast!
+
+All donations above 10 USDC will come with an automatic mint for a Fund Guy (Mycologuys) NFT! *This only applies to unique addresses*
 
 ## Mycologuys NFT Collection
 
 ![collection](./packages/nextjs/public/thumbnail.jpg)
 
-### Artwork
+## Usage
 
-- [Details](https://atowler.com/eth-review/FUNGUYS/Mycologuys-NFTs_Breakdown.pdf)
-- [Assets](https://drive.google.com/drive/folders/17cCTQgya_RZwNQnHxZ_NRK5r-iQMHDSt)
+The Fund Guys developers strongly believe in the ethos of open source contribution and development. So, feel free to fork this repo and make this your own super awesome 🏗️!
 
-### Image Assembly
+*Be sure to also 🌟 this repo!*
 
--[ipfs upload](https://youtu.be/Zhmj4PiJ-GA?t=1324)
+## Contribution
 
-- https://lab.hashlips.io/docs
-- https://www.youtube.com/watch?v=0IRBQ69SkM8
+We are open for contributions! This was built in ETH Denver Hackathon which was a jam-packed Hackathon. Many more features are planned in the pipeline. Connect with us if you'd like to contribute!
 
-### IPFS upload
-
-ipfs://bafybeidnwjxhpv2xnfczfk7x7zucve3yzvxnjyxuakfm3u7ebghfakpmwe/1.json
+- https://github.com/MattPereira
+- https://github.com/swellander
+- https://github.com/PrintRH

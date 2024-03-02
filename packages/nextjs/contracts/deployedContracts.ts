@@ -5,9 +5,9 @@
 import { GenericContractsDeclaration } from "~~/utils/scaffold-eth/contract";
 
 const deployedContracts = {
-  31337: {
+  8453: {
     Mycologuys: {
-      address: "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+      address: "0xA8ca543e8ffe7Eb3df10B3E370a69328F3317ae4",
       abi: [
         {
           inputs: [],
@@ -202,7 +202,13 @@ const deployedContracts = {
           type: "function",
         },
         {
-          inputs: [],
+          inputs: [
+            {
+              internalType: "address",
+              name: "recipient",
+              type: "address",
+            },
+          ],
           name: "mintNft",
           outputs: [],
           stateMutability: "nonpayable",
@@ -258,6 +264,19 @@ const deployedContracts = {
           name: "renounceOwnership",
           outputs: [],
           stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "s_maxSupply",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "view",
           type: "function",
         },
         {
@@ -351,6 +370,19 @@ const deployedContracts = {
             },
           ],
           name: "setBaseUri",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "_maxSupply",
+              type: "uint256",
+            },
+          ],
+          name: "setMaxSupply",
           outputs: [],
           stateMutability: "nonpayable",
           type: "function",
@@ -475,7 +507,7 @@ const deployedContracts = {
       },
     },
     PublicGoodsFunding: {
-      address: "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+      address: "0xcF66C364078E0338169C930bdbf515318B687362",
       abi: [
         {
           inputs: [
@@ -606,6 +638,19 @@ const deployedContracts = {
         {
           inputs: [],
           name: "renounceOwnership",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "_maxSupply",
+              type: "uint256",
+            },
+          ],
+          name: "setMaxSupply",
           outputs: [],
           stateMutability: "nonpayable",
           type: "function",
@@ -1285,7 +1330,7 @@ const deployedContracts = {
   },
   11155111: {
     Mycologuys: {
-      address: "0xCd1BDd14FE3e95d38b73e46250d40a71bB065e7D",
+      address: "0x45083C2b3FC0fD19C99B90550A3C64760d31cE9E",
       abi: [
         {
           inputs: [],
@@ -1785,7 +1830,7 @@ const deployedContracts = {
       },
     },
     PublicGoodsFunding: {
-      address: "0x67C173ED9a9092d6c28Bc7991Bf190c51D352Baf",
+      address: "0xDC90D608034633471fbc15f7440809fC3D29610E",
       abi: [
         {
           inputs: [

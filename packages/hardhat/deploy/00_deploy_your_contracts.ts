@@ -33,8 +33,8 @@ const deployYourContract: DeployFunction = async function (hre: HardhatRuntimeEn
   const fundGuys = {
     title: "FundGuys",
     description: "A public goods funding platform on Base that rewards funders with Mycologuys NFTs",
-    wethContractAddress: "0xfFf9976782d46CC05630D1f6eBAb18b2324d6B14".toLowerCase(), // wETH on Sepolia
-    targetAmount: hre.ethers.parseEther("0.5"),
+    wethContractAddress: "0x4200000000000000000000000000000000000006".toLowerCase(), // wETH on Base
+    targetAmount: hre.ethers.parseEther("0.05"),
     deadline: Math.floor(new Date("2024-04-20").getTime() / 1000),
     image: "https://fund-guys.vercel.app/thumbnail.jpg",
   };
@@ -43,8 +43,8 @@ const deployYourContract: DeployFunction = async function (hre: HardhatRuntimeEn
     title: "BuidlGuild",
     description:
       "A curated group of Ethereum builders creating products, prototypes, and tutorials to enrich the web3 ecosystem",
-    uniContractAddress: "0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984".toLowerCase(), // UNI on Sepolia
-    targetAmount: hre.ethers.parseEther("0.01"),
+    daiContractAddress: "0x50c5725949a6f0c72e6c4a641f24049a917db0cb".toLowerCase(), // DAI on Base
+    targetAmount: hre.ethers.parseEther("10.00"),
     deadline: Math.floor(new Date("2024-06-09").getTime() / 1000),
     image: "https://buidlguidl.com/assets/hero.png",
   };
@@ -61,7 +61,7 @@ const deployYourContract: DeployFunction = async function (hre: HardhatRuntimeEn
   await publicGoodsFunding.createProject(
     buidlGuidl.title,
     buidlGuidl.description,
-    buidlGuidl.uniContractAddress,
+    buidlGuidl.daiContractAddress,
     buidlGuidl.targetAmount,
     buidlGuidl.deadline,
     buidlGuidl.image,
