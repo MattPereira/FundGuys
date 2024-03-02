@@ -39,7 +39,6 @@ export const CampaignCard = ({ contractAddress, isProfilePage }: ICampaignCard) 
     return <div className="skeleton animate-pulse bg-base-100 rounded-xl w-full h-72"></div>;
 
   const [title, description, image, projectTokenAddress, targetAmount, amountRaised, deadline] = projectData as any;
-  console.log("projectData", projectData);
 
   // calculate percentage funded
   const percentageBigInt = (amountRaised || 0n * BigInt(100)) / (targetAmount || 1n);

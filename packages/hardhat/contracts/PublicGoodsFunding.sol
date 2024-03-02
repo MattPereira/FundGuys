@@ -57,8 +57,10 @@ contract PublicGoodsFunding is Ownable {
 			projects[msg.sender],
 			"Only campaign project contracts can mint NFTs"
 		);
-		nftContract.mintNft(tx.origin);
-		emit NFTMinted(msg.sender, tx.origin);
+		if (nftContract.balanceOf(tx.origin) == 0) {
+			nftContract.mintNft(tx.origin);
+			emit NFTMinted(msg.sender, tx.origin);
+		}
 	}
 
 	function setNewBaseUri(string memory _baseUri) public onlyOwner {

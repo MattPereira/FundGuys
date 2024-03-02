@@ -33,61 +33,76 @@ interface IDonateToCampaign {
 export const DonateToCampaign = ({ projectTokenAddress, projectAddress, projectName }: IDonateToCampaign) => {
   const [isClient, setIsClient] = useState(false);
 
+  const { address: connectedAddress } = useAccount();
+
   useEffect(() => {
     setIsClient(true);
   }, []);
-  return isClient ? (
-    <>
-      <button
-        className="btn btn-accent  w-full font-cubano font-normal text-xl"
-        onClick={() => {
-          const modal = document.getElementById(projectAddress);
-          if (modal instanceof HTMLDialogElement) {
-            modal.showModal();
-          }
-        }}
-      >
-        Donate
-      </button>
-      <DonateModal
-        projectName={projectName}
-        projectTokenAddress={projectTokenAddress}
-        projectAddress={projectAddress}
-      />
-    </>
-  ) : (
-    "loading client..."
-  );
+  return isClient
+    ? connectedAddress && (
+        <>
+          <button
+            className="btn btn-accent  w-full font-cubano font-normal text-xl"
+            onClick={() => {
+              const modal = document.getElementById(projectAddress);
+              if (modal instanceof HTMLDialogElement) {
+                modal.showModal();
+              }
+            }}
+          >
+            Donate
+          </button>
+          <DonateModal
+            projectName={projectName}
+            projectTokenAddress={projectTokenAddress}
+            projectAddress={projectAddress}
+            connectedAddress={connectedAddress}
+          />
+        </>
+      )
+    : "loading client...";
 };
 
-const DonateModal = ({ projectTokenAddress, projectAddress, projectName }: IDonateToCampaign) => {
-  const [tokenToDonate, setTokenToDonate] = useState();
-  const [amount, setAmount] = useState();
-  const { address } = useAccount();
+const DonateModal = ({
+  projectTokenAddress,
+  projectAddress,
+  projectName,
+  connectedAddress,
+}: {
+  projectName: string;
+  projectTokenAddress: string;
+  projectAddress: string;
+  connectedAddress: string;
+}) => {
+  const [donationApproved, setDonationApproved] = useState(false);
+  const [tokenToDonate, setTokenToDonate] = useState(projectTokenAddress);
+  const [amount, setAmount] = useState("0");
   const [quote, setQuote] = useState();
-  const isSendingEth = projectTokenAddress === "0x0000000000000000000000000000000000000000";
-  const [buttonText, setButtonText] = useState("Submit");
+  const [approveButtonText, setApproveButtonText] = useState("Approve");
 
-  const parsedAmount = BigInt(parseUnits(amount || "", tokensByAddress[tokenToDonate]?.decimals));
+  const parsedAmount = BigInt(parseUnits(amount, tokensByAddress[tokenToDonate]?.decimals));
 
-  const { data: allowance = 0n } = useContractRead({
+  const { data: allowance } = useContractRead({
     address: tokenToDonate,
     abi: erc20ABI,
     functionName: "allowance",
-    args: [address || "0x", projectTokenAddress],
+    args: [connectedAddress, projectAddress],
   });
-
   console.log("allowance", allowance);
 
-  const { writeAsync: approve } = useContractWrite({
+  const { writeAsync: approve, isSuccess: approveIsSuccess } = useContractWrite({
     address: tokenToDonate,
     abi: erc20ABI,
     functionName: "approve",
     args: [projectAddress, parsedAmount],
   });
 
+  /**
+   * Kinda works if the token being donated is different from the project's desired token
+   * But if the token being donated is the same as the project's desired token, the 0x api returns error
+   */
   const args = [parsedAmount, tokenToDonate, projectTokenAddress, quote?.allowanceTarget, quote?.to, quote?.data];
-  const { writeAsync: sendTokenDonation } = useContractWrite({
+  const { writeAsync: sendTokenDonation, isSuccess: donateIsSuccess } = useContractWrite({
     address: projectAddress,
     abi: ProjectABI,
     functionName: "donateToken",
@@ -95,37 +110,54 @@ const DonateModal = ({ projectTokenAddress, projectAddress, projectName }: IDona
   });
 
   useEffect(() => {
+    if (approveIsSuccess) {
+      setDonationApproved(true); // Update state when approval transaction is successful
+    }
+  }, [approveIsSuccess]);
+
+  useEffect(() => {
+    if (donateIsSuccess) {
+      const modal = document.getElementById("campaign_modal");
+      if (modal instanceof HTMLDialogElement) {
+        modal.close();
+      }
+    }
+  }, [donateIsSuccess]);
+
+  useEffect(() => {
     const getQuote = async () => {
       const res = await fetch(
         `/api/swap?buyToken=${projectTokenAddress}&sellToken=${tokenToDonate}&sellAmount=${parsedAmount}`,
       );
       const quoteData = await res.json();
+      console.log("quoteData", quoteData);
       setQuote(quoteData);
     };
     if (tokenToDonate) getQuote();
   }, [tokenToDonate, projectTokenAddress, parsedAmount]);
 
-  const handleSubmit = async (e: any) => {
-    e.preventDefault(); // Prevent the default form submission behavior
-    // I think allowance not working as in it never gets set or read from allowance useContractRead
-    if (allowance < parsedAmount) {
-      setButtonText("Approving...");
+  const handleApprove = async (e: any) => {
+    e.preventDefault(); // dont close modal on click of approve button
+    try {
+      setApproveButtonText("Approving...");
       await approve();
+    } catch (e) {
+      console.log(e);
+      setApproveButtonText("Approve");
     }
-    setButtonText("Donating...");
+  };
+
+  const handleDonate = async (e: any) => {
+    e.preventDefault(); // dont immediately close modal on click of donate button
     await sendTokenDonation();
-    const modal = document.getElementById("campaign_modal");
-    if (modal instanceof HTMLDialogElement) {
-      modal.close();
-    }
   };
 
   return (
     <dialog id={projectAddress} className="modal">
       <div className="modal-box bg-base-200 p-8 w-full">
-        <h3 className="font-normal font-cubano text-4xl text-center mb-7">Donate</h3>
+        <h3 className="font-bold text-4xl text-center mb-7">Donate</h3>
         <div className="text-xl px-2 mb-5">
-          <div className="flex justify-between">
+          <div className="flex justify-between mb-3">
             <div>Project Name</div>
             <div>{projectName}</div>
           </div>
@@ -136,35 +168,44 @@ const DonateModal = ({ projectTokenAddress, projectAddress, projectName }: IDona
             </div>
           </div>
         </div>
-        <form method="dialog" onSubmit={e => handleSubmit(e)} noValidate autoComplete="off">
-          {isSendingEth ? (
-            <h1>Send eth</h1>
-          ) : (
-            <div>
-              <select
-                onChange={e => setTokenToDonate(e.target.value)}
-                value={tokenToDonate}
-                className="w-full bg-base-300 mb-5 p-5 rounded-2xl cursor-pointer text-xl "
-              >
-                <option disabled selected>
-                  Select token
+        <form method="dialog" noValidate autoComplete="off">
+          <div>
+            <select
+              onChange={e => setTokenToDonate(e.target.value)}
+              value={tokenToDonate}
+              className="w-full bg-base-300 mb-5 p-5 rounded-2xl cursor-pointer text-xl "
+            >
+              {SUPPORTED_TOKENS.map(tokenData => (
+                <option key={tokenData.address} value={tokenData.address}>
+                  {tokenData.symbol}
                 </option>
-                {SUPPORTED_TOKENS.map(tokenData => (
-                  <option key={tokenData.address} value={tokenData.address}>
-                    {tokenData.symbol}
-                  </option>
-                ))}
-              </select>
-              <input
-                value={amount}
-                onChange={e => setAmount(e.target.value)}
-                type="number"
-                placeholder="Amount"
-                className="w-full bg-base-300 mb-5 p-5 rounded-2xl text-xl"
-              />
-            </div>
+              ))}
+            </select>
+            <input
+              value={amount}
+              onChange={e => setAmount(e.target.value)}
+              type="number"
+              placeholder="Amount"
+              className="w-full bg-base-300 mb-5 p-5 rounded-2xl text-xl"
+            />
+          </div>
+
+          {allowance || 0n > parsedAmount || donationApproved ? (
+            <button
+              onClick={e => handleDonate(e)}
+              className="btn btn-lg btn-accent font-cubano text-2xl font-normal w-full"
+            >
+              Submit
+            </button>
+          ) : (
+            <button
+              disabled={approveButtonText === "Approving..."}
+              onClick={e => handleApprove(e)}
+              className="btn btn-lg btn-accent font-cubano text-2xl font-normal w-full"
+            >
+              {approveButtonText}
+            </button>
           )}
-          <button className="btn btn-lg btn-accent font-cubano text-2xl font-normal w-full">{buttonText}</button>
         </form>
       </div>
       <form method="dialog" className="modal-backdrop">

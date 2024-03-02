@@ -16,7 +16,6 @@ export default function CampaignDetailsPage({ params }: { params: { address: str
 
   if (isLoading) return <div>Loading...</div>;
 
-  console.log("projectData", projectData);
   const [title, description, image, projectTokenAddress, targetAmount, amountRaised, deadline] = projectData as any;
 
   const percentageBigInt = (amountRaised || 0n * BigInt(100)) / (targetAmount || 1n);
