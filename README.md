@@ -24,6 +24,34 @@ The Fund Guys developers strongly believe in the ethos of open source contributi
 
 *Be sure to also 🌟 this repo!*
 
+### Quickstart for Devs
+
+To get started with Fund Guys, follow the steps below:
+
+1. Clone this repo:
+   
+   ```
+   git clone https://github.com/MattPereira/FundGuys.git
+   ```
+   
+3. Change directory:
+
+   ```
+   cd FundGuys
+   ```
+   
+5. Install dependencies:
+
+   ```
+   yarn install
+   ```
+   
+7. Start NextJS App:
+ 
+   ```
+   yarn start
+   ```
+
 ## Contribution
 
 We are open for contributions! This was built in ETH Denver Hackathon which was a jam-packed Hackathon. Many more features are planned in the pipeline. Connect with us if you'd like to contribute!
