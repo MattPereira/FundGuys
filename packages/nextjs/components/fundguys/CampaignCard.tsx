@@ -18,7 +18,7 @@ export const CampaignCard = ({ contractAddress, isProfilePage }: ICampaignCard) 
     functionName: "getProject",
   });
 
-  const { write } = useContractWrite({
+  const { writeAsync: withdraw } = useContractWrite({
     address: contractAddress ?? "",
     abi: ProjectABI,
     functionName: "withdrawFunds",
@@ -77,7 +77,10 @@ export const CampaignCard = ({ contractAddress, isProfilePage }: ICampaignCard) 
             Details
           </Link>
           {isProfilePage ? (
-            <button onClick={() => write({})} className="btn btn-primary  w-full font-cubano font-normal text-xl">
+            <button
+              onClick={async () => await withdraw()}
+              className="btn btn-primary  w-full font-cubano font-normal text-xl"
+            >
               Withdraw
             </button>
           ) : (

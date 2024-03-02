@@ -34,7 +34,7 @@ const deployYourContract: DeployFunction = async function (hre: HardhatRuntimeEn
     title: "FundGuys",
     description: "A public goods funding platform on Base that rewards funders with Mycologuys NFTs",
     wethContractAddress: "0xfFf9976782d46CC05630D1f6eBAb18b2324d6B14".toLowerCase(), // wETH on Sepolia
-    targetAmount: hre.ethers.parseEther("0.420"),
+    targetAmount: hre.ethers.parseEther("0.5"),
     deadline: Math.floor(new Date("2024-04-20").getTime() / 1000),
     image: "https://fund-guys.vercel.app/thumbnail.jpg",
   };
@@ -44,7 +44,7 @@ const deployYourContract: DeployFunction = async function (hre: HardhatRuntimeEn
     description:
       "A curated group of Ethereum builders creating products, prototypes, and tutorials to enrich the web3 ecosystem",
     uniContractAddress: "0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984".toLowerCase(), // UNI on Sepolia
-    targetAmount: hre.ethers.parseEther("0.69"),
+    targetAmount: hre.ethers.parseEther("0.01"),
     deadline: Math.floor(new Date("2024-06-09").getTime() / 1000),
     image: "https://buidlguidl.com/assets/hero.png",
   };

@@ -1285,7 +1285,7 @@ const deployedContracts = {
   },
   11155111: {
     Mycologuys: {
-      address: "0x3F92CbDB5fc07A21c30c9371749aEa21e661A5cF",
+      address: "0xCd1BDd14FE3e95d38b73e46250d40a71bB065e7D",
       abi: [
         {
           inputs: [],
@@ -1785,7 +1785,7 @@ const deployedContracts = {
       },
     },
     PublicGoodsFunding: {
-      address: "0xEbF4568A8b0Bd002667848ECFEBb5314C34a2930",
+      address: "0x67C173ED9a9092d6c28Bc7991Bf190c51D352Baf",
       abi: [
         {
           inputs: [
