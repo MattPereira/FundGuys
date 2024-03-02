@@ -24,20 +24,13 @@ export default function CampaignDetailsPage({ params }: { params: { address: str
   const deadlineDate = new Date(Number(deadline) * 1000);
 
   const handleShare = () => {
-    // if (events && events.length > 0) {
-    // const projectOwnerAddress = events[0].args.projectOwner;
-    // const truncatedOwner = `${projectOwnerAddress?.slice(0, 2)}...${projectOwnerAddress?.slice(-4)}`;
-    // const text = `Owner (${truncatedOwner}) would like your help with their campaign: ${title}. Take a moment to hear their story.`;
-    const text = `Take a moment to hear about the stories from the Fund Guys Community 🍄`;
-    const url = "https://fund-guys.vercel.app/campaigns"; // Replace with your campaign link
+    const text = `Take a moment to hear about ${title} story from the Fund Guys Community 🍄`;
+    const url = `https://fund-guys.vercel.app/campaigns/${params.address}`;
     const warpcastUrl = `https://warpcast.com/~/compose?text=${encodeURIComponent(text)}&embeds[]=${encodeURIComponent(
       url,
     )}`;
 
     window.open(warpcastUrl, "_blank");
-    // } else {
-    //   console.log("No events found")
-    // }
   };
 
   return (
