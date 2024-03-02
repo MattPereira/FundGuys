@@ -6,18 +6,18 @@ import { TokenSymbol } from "~~/components/fundguys/";
 
 const SUPPORTED_TOKENS = [
   {
-    symbol: "LINK",
-    address: "0x779877A7B0D9E8603169DdbD7836e478b4624789",
-    decimals: 18,
+    symbol: "USDC",
+    address: "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+    decimals: 6,
   },
   {
-    symbol: "UNI",
-    address: "0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984",
+    symbol: "DAI",
+    address: "0x50c5725949A6F0c72E6C4a641F24049A917DB0Cb",
     decimals: 18,
   },
   {
     symbol: "WETH",
-    address: "0xfFf9976782d46CC05630D1f6eBAb18b2324d6B14",
+    address: "0x4200000000000000000000000000000000000006",
     decimals: 18,
   },
 ];
@@ -109,6 +109,13 @@ const DonateModal = ({
     args,
   });
 
+  const { writeAsync: donateSameToken} = useContractWrite({
+    address: projectAddress,
+    abi: ProjectABI,
+    functionName: "donateSameToken",
+    args: ["0xfff9976782d46cc05630d1f6ebab18b2324d6b14"],
+  });
+
   useEffect(() => {
     if (approveIsSuccess) {
       setDonationApproved(true); // Update state when approval transaction is successful
@@ -149,7 +156,11 @@ const DonateModal = ({
 
   const handleDonate = async (e: any) => {
     e.preventDefault(); // dont immediately close modal on click of donate button
+    if (projectTokenAddress === tokenToDonate) {
+      await donateSameToken();
+    } else {
     await sendTokenDonation();
+  }
   };
 
   return (

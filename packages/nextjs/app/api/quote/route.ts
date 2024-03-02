@@ -15,7 +15,7 @@ export async function GET(request: NextRequest) {
 
     const NEXT_PUBLIC_0X_API_KEY = process.env.NEXT_PUBLIC_0X_API_KEY;
 
-    const requestUrl = `https://sepolia.api.0x.org/swap/v1/price?${searchParams}`;
+    const requestUrl = `https://base.api.0x.org/swap/v1/price?${searchParams}`;
     // console.log('requestUrl', requestUrl)
 
     const response = await fetch(requestUrl, {
