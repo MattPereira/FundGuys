@@ -75,7 +75,7 @@ const CreateCampaignModal = () => {
 
   return (
     <dialog id="campaign_modal" className="modal">
-      <div className="modal-box bg-base-200 border-base-300 border-2 p-8 w-full">
+      <div className="modal-box bg-base-200 p-8 w-full">
         <div className="flex justify-center items-center mb-5">
           <h3 className="font-normal font-cubano text-4xl text-center">Create</h3>
         </div>
@@ -128,12 +128,7 @@ const CreateCampaignModal = () => {
             errors={errors.birthdate}
           />
 
-          <button
-            onClick={() => console.log("clicked")}
-            className="btn btn-lg btn-accent text-2xl font-normal font-cubano w-full mt-5 mb-2"
-          >
-            Submit
-          </button>
+          <button className="btn btn-lg btn-accent text-2xl font-normal font-cubano w-full mt-5 mb-2">Submit</button>
         </form>
       </div>
 

@@ -475,7 +475,7 @@ const deployedContracts = {
       },
     },
     PublicGoodsFunding: {
-      address: "0x5FC8d32690cc91D4c39d9d3abcBD16989F875707",
+      address: "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
       abi: [
         {
           inputs: [
@@ -1285,7 +1285,7 @@ const deployedContracts = {
   },
   11155111: {
     Mycologuys: {
-      address: "0xc0834Fe80b30c211E0b8004738BaC81F68C049FE",
+      address: "0x19be41FeF385C0007500405576bDd8C02BdEEAAC",
       abi: [
         {
           inputs: [],
@@ -1753,7 +1753,7 @@ const deployedContracts = {
       },
     },
     PublicGoodsFunding: {
-      address: "0x01E7A49B5057bE266642d1219faECf5b5FAdB4Ac",
+      address: "0x3BC065b67638208631e35D8773f653A78Bb0279d",
       abi: [
         {
           inputs: [

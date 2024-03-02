@@ -18,8 +18,7 @@ const Home: NextPage = () => {
   const { data: events, isLoading: isLoadingEvents } = useScaffoldEventHistory({
     contractName: "PublicGoodsFunding",
     eventName: "ProjectCreated",
-    fromBlock: 31231n,
-    watch: true,
+    fromBlock: 0n, // update with the block number of the contract deployment
     blockData: true,
     transactionData: true,
     receiptData: true,
