@@ -13,6 +13,7 @@ contract Mycologuys is ERC721, Ownable {
 		"ipfs://bafybeidnwjxhpv2xnfczfk7x7zucve3yzvxnjyxuakfm3u7ebghfakpmwe/";
 	string public uriSuffix = ".json";
 	uint256 public s_tokenCounter;
+	uint256 public s_maxSupply = 420;
 
 	// Functions
 	/**
@@ -25,8 +26,8 @@ contract Mycologuys is ERC721, Ownable {
 	/**
 	 * Increment token counter after minting
 	 */
-	function mintNft() public onlyOwner {
-		_safeMint(msg.sender, s_tokenCounter);
+	function mintNft(address recipient) public onlyOwner {
+		_safeMint(recipient, s_tokenCounter);
 		s_tokenCounter = s_tokenCounter + 1;
 	}
 
@@ -52,5 +53,9 @@ contract Mycologuys is ERC721, Ownable {
 	 */
 	function setBaseUri(string memory _baseUri) public onlyOwner {
 		baseUri = _baseUri;
+	}
+
+	function setMaxSupply(uint256 _maxSupply) public onlyOwner {
+		s_maxSupply = _maxSupply;
 	}
 }

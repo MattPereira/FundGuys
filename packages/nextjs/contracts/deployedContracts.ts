@@ -1285,7 +1285,7 @@ const deployedContracts = {
   },
   11155111: {
     Mycologuys: {
-      address: "0x19be41FeF385C0007500405576bDd8C02BdEEAAC",
+      address: "0x4bCF326b15c744250D1fA40f0161FC3ce360501c",
       abi: [
         {
           inputs: [],
@@ -1480,7 +1480,13 @@ const deployedContracts = {
           type: "function",
         },
         {
-          inputs: [],
+          inputs: [
+            {
+              internalType: "address",
+              name: "recipient",
+              type: "address",
+            },
+          ],
           name: "mintNft",
           outputs: [],
           stateMutability: "nonpayable",
@@ -1536,6 +1542,19 @@ const deployedContracts = {
           name: "renounceOwnership",
           outputs: [],
           stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "s_maxSupply",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "view",
           type: "function",
         },
         {
@@ -1629,6 +1648,19 @@ const deployedContracts = {
             },
           ],
           name: "setBaseUri",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "_maxSupply",
+              type: "uint256",
+            },
+          ],
+          name: "setMaxSupply",
           outputs: [],
           stateMutability: "nonpayable",
           type: "function",
@@ -1753,7 +1785,7 @@ const deployedContracts = {
       },
     },
     PublicGoodsFunding: {
-      address: "0x3BC065b67638208631e35D8773f653A78Bb0279d",
+      address: "0x0643a4C41EC959950d411874401cbB38D7aF46E8",
       abi: [
         {
           inputs: [
@@ -1884,6 +1916,19 @@ const deployedContracts = {
         {
           inputs: [],
           name: "renounceOwnership",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "_maxSupply",
+              type: "uint256",
+            },
+          ],
+          name: "setMaxSupply",
           outputs: [],
           stateMutability: "nonpayable",
           type: "function",

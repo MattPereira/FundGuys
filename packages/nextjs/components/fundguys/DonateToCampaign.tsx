@@ -41,7 +41,7 @@ export const DonateToCampaign = ({ projectTokenAddress, projectAddress, projectN
       <button
         className="btn btn-accent  w-full font-cubano font-normal text-xl"
         onClick={() => {
-          const modal = document.getElementById("donate_modal");
+          const modal = document.getElementById(projectAddress);
           if (modal instanceof HTMLDialogElement) {
             modal.showModal();
           }
@@ -76,6 +76,8 @@ const DonateModal = ({ projectTokenAddress, projectAddress, projectName }: IDona
     functionName: "allowance",
     args: [address || "0x", projectTokenAddress],
   });
+
+  console.log("allowance", allowance);
 
   const { writeAsync: approve } = useContractWrite({
     address: tokenToDonate,
@@ -119,7 +121,7 @@ const DonateModal = ({ projectTokenAddress, projectAddress, projectName }: IDona
   };
 
   return (
-    <dialog id="donate_modal" className="modal">
+    <dialog id={projectAddress} className="modal">
       <div className="modal-box bg-base-200 p-8 w-full">
         <h3 className="font-normal font-cubano text-4xl text-center mb-7">Donate</h3>
         <div className="text-xl px-2 mb-5">
