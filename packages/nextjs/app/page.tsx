@@ -24,6 +24,9 @@ const Home: NextPage = () => {
     receiptData: true,
   });
 
+  console.log("events", events);
+  // filter out 0xB094a3CA0183aC648C2aE0672732f653c8651688
+
   return (
     <>
       <div className="px-5 sm:px-7 md:px-20 my-10">
@@ -45,6 +48,11 @@ const Home: NextPage = () => {
               <SkeletonLoader numberOfItems={3} />
             ) : (
               events
+                .filter(
+                  (event: any) =>
+                    event.args.projectAddress.toLowerCase() !==
+                    "0xb094a3ca0183ac648c2ae0672732f653c8651688".toLowerCase(),
+                )
                 .slice(0, 3)
                 .map((event: any, idx: number) => (
                   <CampaignCard key={idx} contractAddress={event.args.projectAddress} isProfilePage={false} />
@@ -55,7 +63,7 @@ const Home: NextPage = () => {
 
         <div className="mb-10">
           <h3 className="text-3xl mb-5 font-bold">Recent Funders</h3>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-8">
             {isLoading || !nfts ? (
               <SkeletonLoader numberOfItems={4} />
             ) : (

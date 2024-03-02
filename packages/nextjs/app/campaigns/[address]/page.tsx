@@ -50,27 +50,27 @@ export default function CampaignDetailsPage({ params }: { params: { address: str
               </button>
               <button className="btn-accent btn w-full font-cubano font-normal text-xl">Donate</button>
             </div>
-            <div className="overflow-x-auto border border-white rounded-lg">
+            <div className="overflow-x-auto border border-primary rounded-lg">
               <table className="table ">
                 <tbody className="text-xl">
                   <tr>
-                    <th className="border-r border-b border-white">Title</th>
-                    <td className="border-b">{title}</td>
+                    <th className="border-r border-b border-primary">Title</th>
+                    <td className="border-b border-primary">{title}</td>
                   </tr>
                   <tr>
-                    <th className="border-r border-b border-white">Description</th>
-                    <td className="border-b">{description}</td>
+                    <th className="border-r border-b border-primary">Description</th>
+                    <td className="border-b border-primary">{description}</td>
                   </tr>
                   <tr>
-                    <th className="border-r border-b border-white">Fundraising</th>
-                    <td className="border-b">
+                    <th className="border-r border-b border-primary">Fundraising</th>
+                    <td className="border-b border-primary">
                       {Number(formatUnits(amountRaised || "", 18)).toFixed(2)} / {formatUnits(targetAmount || "", 18)}{" "}
                       <TokenSymbol tokenAddress={projectTokenAddress} />
                     </td>
                   </tr>
                   <tr>
-                    <th className="border-r border-b border-white">Deadline</th>
-                    <td className="border-b">{deadlineDate.toDateString()}</td>
+                    <th className="border-r border-b border-primary">Deadline</th>
+                    <td className="border-b border-primary">{deadlineDate.toDateString()}</td>
                   </tr>
                 </tbody>
               </table>

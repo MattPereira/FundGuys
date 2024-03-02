@@ -26,9 +26,15 @@ const Campaigns: NextPage = () => {
               <div key={idx} className="skeleton animate-pulse bg-base-100 rounded-xl w-full h-72"></div>
             ))}
           {data &&
-            data?.map(({ args: { projectAddress } }) => (
-              <CampaignCard key={projectAddress} contractAddress={projectAddress} isProfilePage={false} />
-            ))}
+            data
+              ?.filter(
+                (event: any) =>
+                  event.args.projectAddress.toLowerCase() !==
+                  "0xb094a3ca0183ac648c2ae0672732f653c8651688".toLowerCase(),
+              )
+              .map(({ args: { projectAddress } }) => (
+                <CampaignCard key={projectAddress} contractAddress={projectAddress} isProfilePage={false} />
+              ))}
         </div>
       </div>
     </>
