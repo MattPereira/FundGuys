@@ -1,6 +1,6 @@
 # FundGuys
 
-A Public Goods Funding Platform on Base that rewards funders with Mygologuys NFTs!
+A Public Goods Funding Platform on Base that allows campaign creators to choose a preferred token and automatically swaps donations using the 0x API. Additionally, first time funders are rewarded with Mycologuys NFTs!
 
 ## Public Goods Funding Platform
 
@@ -12,7 +12,7 @@ Follow the steps below to get started:
 
 Bonus: Click Share to share their story on Warpcast!
 
-All donations above 10 USDC will come with an automatic mint for a Fund Guy (Mycologuys) NFT! *This only applies to unique addresses*
+All donations above 10 USDC will come with an automatic mint for a Fund Guy (Mycologuys) NFT! _This only applies to unique addresses_
 
 ## Mycologuys NFT Collection
 
@@ -22,32 +22,32 @@ All donations above 10 USDC will come with an automatic mint for a Fund Guy (Myc
 
 The Fund Guys developers strongly believe in the ethos of open source contribution and development. So, feel free to fork this repo and make this your own super awesome 🏗️!
 
-*Be sure to also 🌟 this repo!*
+_Be sure to also 🌟 this repo!_
 
 ### Quickstart for Devs
 
 To get started with Fund Guys, follow the steps below:
 
 1. Clone this repo:
-   
+
    ```
    git clone https://github.com/MattPereira/FundGuys.git
    ```
-   
-3. Change directory:
+
+2. Change directory:
 
    ```
    cd FundGuys
    ```
-   
-5. Install dependencies:
+
+3. Install dependencies:
 
    ```
    yarn install
    ```
-   
-7. Start NextJS App:
- 
+
+4. Start NextJS App:
+
    ```
    yarn start
    ```
